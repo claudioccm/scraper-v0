@@ -1,0 +1,29 @@
+/* Syntax for ordering layers */
+@layer reset, defaults, utils, overrides;
+
+/* Reset Layer */
+
+@import "base/reset.css" layer(reset);
+@import 'base/vue2-perfect-scrollbar.css' layer(defaults);
+
+/* Defaults Layer */
+@import 'base/fonts.css' layer(defaults);
+
+@import 'vars/colors.css' layer(defaults);
+@import 'vars/space.css' layer(defaults);
+@import 'vars/vars.css' layer(defaults);
+
+@import "base/typography.css" layer(defaults);
+@import 'base/everylayout.css' layer(defaults);
+
+/* Utils Layer */
+@import "utils/color-utils-background-color.css" layer(utils);
+@import "utils/color-utils-color.css" layer(utils);
+@import "utils/color-utils-border-color.css" layer(utils);
+@import "utils/space-utils.css" layer(utils);
+
+@import "utils/utils.css" layer(utils);
+
+/* Development Styles */
+@import "dev.css" layer(overrides);
+

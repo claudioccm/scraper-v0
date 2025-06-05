@@ -1,0 +1,78 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack > * {
+  margin-block: 0;
+}
+
+.stack > * + * {
+  margin-block-start: var(--_stack-space, 1.5rem);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--_cluster-space, 1rem);
+  justify-content: flex-start;
+  align-items: center;
+
+  /* data-split - isso é um modifier do cluster, que empurra os elementos para o lado oposto do parent */
+  [split-left] { margin-left: auto; }
+  [split-right] { margin-right: auto; }
+}
+
+.center {
+  box-sizing: content-box;
+  margin-inline: auto;
+  padding-inline: var(--_center-padding, 1rem);
+  max-inline-size: var(--_center-measure);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--_grid-gap, var(--base-gutter));
+}
+
+.reel {
+  display: flex;
+  block-size: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-color: #fff #000;
+}
+
+.reel::-webkit-scrollbar {
+  block-size: 1rem;
+}
+
+.reel::-webkit-scrollbar-track {
+  background-color: #000;
+}
+
+.reel::-webkit-scrollbar-thumb {
+  background-color: #000;
+  background-image: linear-gradient(#000 0, #000 0.25rem, #fff 0.25rem, #fff 0.75rem, #000 0.75rem);
+}
+
+.reel > * {
+  flex: 0 0 auto;
+}
+
+
+.reel > img {
+  block-size: 100%;
+  flex-basis: auto;
+  width: auto;
+}
+
+.reel > * + * {
+  margin-inline-start: 1rem;
+}
+
+.reel.overflowing {
+  padding-block-end: 1rem;
+}
