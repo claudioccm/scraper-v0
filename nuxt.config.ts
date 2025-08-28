@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   plugins: [
     
   ],
-  ssr: false,
+  ssr: true,
   experimental: {
     clientFallback: true
   },

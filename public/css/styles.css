@@ -4,7 +4,6 @@
 /* Reset Layer */
 
 @import "base/reset.css" layer(reset);
-@import 'base/vue2-perfect-scrollbar.css' layer(defaults);
 
 /* Defaults Layer */
 @import 'base/fonts.css' layer(defaults);
