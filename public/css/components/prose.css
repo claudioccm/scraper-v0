@@ -1,0 +1,204 @@
+.prose {
+  --_prose-space: var(--space-s);
+
+  * + * { margin-top: var(--_prose-space); }
+  
+  :is(h1, h2, h3, h4, h5, h6) {
+    --_prose-space: var(--space-l); 
+    line-height: 1.35;
+  } 
+}
+
+/* .prose-layout {
+  --padding-inline: 1rem;
+  --content-max-width: 70ch;
+  --narrow-size-reduction: 60px;
+  --popout-extra-distance: 60px;
+  --breakout-extra-distance: 120px;
+
+  display: grid;
+  
+  grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.full-width {
+  grid-template-columns: subgrid;
+  grid-column: full-width;
+  display: grid;
+
+  .content {
+    grid-column: content;
+  }
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+.prose-layout {
+  --padding-inline: 1rem;
+  --content-max-width: 70ch;
+  --narrow-size-reduction: 60px;
+  --popout-extra-distance: 60px;
+  --breakout-extra-distance: 120px;
+
+  --_narrow-column-size: calc(
+    (var(--content-max-width) - var(--narrow-size-reduction)) / 2
+  );
+  --_content-column-size: var(--narrow-size-reduction);
+  --_breakout-column-size: calc(
+    var(--breakout-extra-distance) - var(--popout-extra-distance)
+  );
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--_breakout-column-size))
+    [popout-start] minmax(0, var(--popout-extra-distance))
+    [content-start] minmax(0, var(--_content-column-size))
+    [narrow-start]
+    min(50% - var(--padding-inline), var(--_narrow-column-size))
+    [center-line]
+    min(50% - var(--padding-inline), var(--_narrow-column-size))
+    [narrow-end]
+    minmax(0, var(--_content-column-size))
+    [content-end]
+    minmax(0, var(--popout-extra-distance)) [popout-end]
+    minmax(0, var(--_breakout-column-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
+}
+
+:is(.prose-layout, .full-width) > * {
+  grid-column: content;
+}
+
+:is(.prose-layout, .full-width) > .narrow {
+  grid-column: narrow;
+}
+:is(.prose-layout, .full-width) > .narrow-left-only {
+  grid-column: narrow-start / content-end;
+}
+:is(.prose-layout, .full-width) > .narrow-right-only {
+  grid-column: content-start / narrow-end;
+}
+:is(.prose-layout, .full-width) > .popout {
+  grid-column: popout;
+}
+:is(.prose-layout, .full-width) > .popout-left-only {
+  grid-column: popout-start / content-end;
+}
+:is(.prose-layout, .full-width) > .popout-right-only {
+  grid-column: content-start / popout-end;
+}
+:is(.prose-layout, .full-width) > .breakout {
+  grid-column: breakout;
+}
+:is(.prose-layout, .full-width) > .breakout-left-only {
+  grid-column: breakout-start / content-end;
+}
+:is(.prose-layout, .full-width) > .breakout-right-only {
+  grid-column: content-start / popout-end;
+}
+:is(.prose-layout, .full-width) > .full-width {
+  display: grid;
+  grid-template-columns: inherit;
+  grid-column: full-width;
+}
+:is(.prose-layout, .full-width) > .full-width-left-only {
+  grid-column: full-width-start / content-end;
+}
+:is(.prose-layout, .full-width) > .full-width-right-only {
+  grid-column: content-start / full-width-end;
+}
+
+.full-width-content-split,
+.full-width-popout-split,
+.full-width-narrow-split,
+.full-width-breakout-split {
+  grid-column: full-width;
+  display: grid;
+  grid-template-columns: inherit;
+
+  > :is(:first-child, :last-child) {
+    display: grid;
+    grid-template-columns: subgrid;
+    align-content: center;
+  }
+
+  > :where(:first-child) {
+    grid-column: full-width-start / center-line;
+    padding-right: 2rem;
+    > * {
+      grid-column: var(--_size, content) / center-line;
+    }
+  }
+
+  > :where(:last-child) {
+    grid-column: center-line / full-width-end;
+    padding-left: 2rem;
+
+    > * {
+      grid-column: center-line / var(--_size);
+    }
+  }
+}
+
+.full-width-content-split {
+  --_size: content;
+}
+.full-width-narrow-split {
+  --_size: narrow;
+}
+.full-width-popout-split {
+  --_size: popout;
+}
+.full-width-content-split {
+  --_size: content;
+}
+.full-width-breakout-split {
+  --_size: breakout;
+}
+
+.full-half {
+  padding: 0;
+  > * {
+    grid-column: 1 / -1;
+  }
+}
+  */

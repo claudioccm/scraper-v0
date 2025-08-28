@@ -1,5 +1,5 @@
 /* Syntax for ordering layers */
-@layer reset, defaults, utils, overrides;
+@layer reset, defaults, components, utils, overrides;
 
 /* Reset Layer */
 
@@ -15,6 +15,8 @@
 @import "base/typography.css" layer(defaults);
 @import 'base/everylayout.css' layer(defaults);
 
+@import "components/prose.css" layer(components);
+
 /* Utils Layer */
 @import "utils/color-utils-background-color.css" layer(utils);
 @import "utils/color-utils-color.css" layer(utils);
@@ -22,6 +24,8 @@
 @import "utils/space-utils.css" layer(utils);
 
 @import "utils/utils.css" layer(utils);
+
+
 
 /* Development Styles */
 @import "dev.css" layer(overrides);
