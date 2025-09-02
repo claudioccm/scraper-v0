@@ -38,7 +38,7 @@ const { data: blogPosts } = await useAsyncData('home-blog-posts', () => {
 })
 
 const { data: caseStudies } = await useAsyncData('home-case-studies', () => {
-  return queryCollection('casestudies')
+  return queryCollection('case-studies')
     .order('title', 'ASC')
     .all()
 })

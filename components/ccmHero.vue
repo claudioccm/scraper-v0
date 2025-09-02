@@ -1,5 +1,6 @@
 <template>
-  <div class="hero | subgrid">
+  <div class="hero">
+    <ccm-topbar />
     <h1>Hero</h1>
   </div>
 </template>
@@ -11,8 +12,5 @@
 <style scoped>
 .hero {
   background-color: yellow;
-  aspect-ratio: 16/9;
-  display: grid;
-  grid-column: full-start / full-end;
 }
 </style>

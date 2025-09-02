@@ -9,6 +9,23 @@
   } 
 }
 
+
+.prose {
+  hgroup {
+    h4 ~ h2,
+    h4 ~ h3 { margin-top: 0; }
+
+    h4:first-child {
+      font-weight: 800;
+      text-transform: uppercase;
+      font-family: var(--body-font);
+    }
+  }
+
+  
+
+}
+
 /* .prose-layout {
   --padding-inline: 1rem;
   --content-max-width: 70ch;

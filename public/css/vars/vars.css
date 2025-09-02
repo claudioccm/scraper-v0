@@ -1,11 +1,11 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
-@import url("https://cloud.typography.com/7264818/6254032/css/fonts.css");
+@import url("https://cloud.typography.com/7264818/6341032/css/fonts.css");
 
 :root {
-  --display-font: "Idlewild SSm A", "Idlewild SSm B", sans-serif;
-  --body-font: "Ringside Regular SSm A", "Ringside Regular SSm B", sans-serif;
+  --display-font: "Sentinel SSm A", "Sentinel SSm B", sans-serif;
+  --body-font: "trade-gothic-next", sans-serif;
   --icon-font: "Material Symbols Outlined";
 }
 

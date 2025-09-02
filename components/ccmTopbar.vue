@@ -1,15 +1,13 @@
 <template>
-  <div class="topbar | subgrid | cluster">
-    <h1 class="h2"><nuxt-link to="/">New Commons Challenge</nuxt-link></h1>
-    <nav split>
+  <div class="topbar | cluster">
+    <h1 class="h2"><nuxt-link to="/">ccm.design</nuxt-link></h1>
+    <nav class="margin-left:auto">
       <ul class="topbar__nav | cluster">
-        <li><nc-button el="a" href="prize" color="base" variant="link">The Prize</nc-button></li>
-        <li><nc-button el="a" href="event"   color="base" variant="link">Event</nc-button></li>
-        <li><nc-button el="a" href="winners"   color="base" variant="link">Winners</nc-button></li>
-        <li><nc-button el="a" href="blog"  color="base" variant="link">Blog</nc-button></li>
-        <li><nc-button el="a" href="faq"   color="base" variant="link">FAQ</nc-button></li>
-        <li><nc-button el="span" href="#"   color="base" variant="link" disabled>Rules</nc-button></li>
-        <li><nc-button el="a" href="apply" color="base" variant="primary">Apply Now</nc-button></li>
+        <li><nuxt-link to="/what-we-do">What we do</nuxt-link></li>
+        <li><nuxt-link to="/about">About</nuxt-link></li>
+        <li><nuxt-link to="/case-studies">Case Studies</nuxt-link></li>
+        <li><nuxt-link to="/blog">Insights</nuxt-link></li>
+        <li><nuxt-link to="/contact">Contact</nuxt-link></li>
       </ul>
     </nav>   
   </div>
@@ -22,7 +20,7 @@
 <style scoped>
 .topbar {
   padding-block: var(--space-xs);
-  grid-column: content-start / content-end; /* Grid template columns are defined by the .subgrid class, and grid-column attr. */
+  width: 100%;
 }
 
 .topbar {

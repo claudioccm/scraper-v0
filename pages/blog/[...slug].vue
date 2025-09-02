@@ -11,7 +11,7 @@
       />
     <!-- <pre>{{ post }}</pre> -->
 
-    <ContentRenderer v-if="post" :value="post" class="post-main-content" />
+    <ContentRenderer v-if="post" :value="post" class="post-main-content | prose" />
     
     <div v-else>
       <h1>Post not found</h1>
@@ -42,5 +42,7 @@ const { data: post } = await useAsyncData(`blog-${route.params.slug}`, () => {
 .prose-section > .content {
   margin-inline: auto;
   max-width: var(--content-max-width);
+  padding-inline: var(--space-xs);
+  box-sizing: content-box;
 }
 </style>

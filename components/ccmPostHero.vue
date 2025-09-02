@@ -1,6 +1,6 @@
 <template>
   <div class="ccm-post-hero full-width" :title="title" :brow="brow" :date="date" :author="author" :tags="tags" :tagline="tagline">
-    <div class="content">
+    <div class="content | stack">
       <NuxtLink to="/blog">Back to Blog</NuxtLink>
       <h4>{{ brow }}</h4>
       <h1>{{ title }}</h1>
@@ -49,5 +49,14 @@ const props = defineProps({
 .ccm-post-hero {
   background-color: var(--primary-color);
   padding-block: var(--space-xl);
+}
+
+h4, h3 {
+  font-family: var(--body-font);
+  font-weight: 200;
+}
+
+h1, h3, h4 {
+  margin-block: 0;
 }
 </style>
