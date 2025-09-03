@@ -1,6 +1,6 @@
 <template>
   <div :title="title" :brow="brow" :date="date" :author="author" :tags="tags" :tagline="tagline">
-    <div>
+    <div class="ccm-post-hero__content">
       <NuxtLink to="/blog">Back to Blog</NuxtLink>
       <h4>{{ brow }}</h4>
       <h1>{{ title }}</h1>
@@ -46,6 +46,13 @@ const props = defineProps({
 </script>
 
 <style scoped>
+.ccm-post-hero__content {
+  margin-inline: auto;
+  max-width: var(--_prose-max-width);
+  padding-inline: var(--space-xs);
+  box-sizing: content-box;
+}
+
 .ccm-post-hero {
   background-color: var(--primary-color);
   padding-block: var(--space-xl);

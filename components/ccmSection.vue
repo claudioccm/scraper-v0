@@ -1,6 +1,6 @@
 <template>
-  <section class="ccm-section" :size="size">
-    <div class="center">
+  <section class="ccm-section" :size="size" :background-color="backgroundColor" :full-width="fullWidth">
+    <div :class="['ccm-section-container', { center: fullWidth === false }]">
       <slot />
     </div>
   </section>
@@ -11,6 +11,14 @@ const props = defineProps({
   size: {
     type: String,
     default: 'l'
+  },
+  backgroundColor: {
+    type: String,
+    default: 'transparent'
+  },
+  fullWidth: {
+    type: Boolean,
+    default: false
   }
 })
 </script>

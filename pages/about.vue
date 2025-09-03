@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <ccm-section>
     <h1>About</h1>
-  </div>
+  </ccm-section>
 </template>
 
 <script setup>

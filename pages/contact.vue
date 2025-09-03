@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <ccm-section>
     <h1>Contact</h1>
-  </div>
+    <pre>
+      [Contact Form Component]
+      [Newsletter Signup Form Component]
+    </pre>
+  </ccm-section>
 </template>
 
 <script setup>

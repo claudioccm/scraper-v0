@@ -676,3 +676,93 @@
   --blue-color-90-alpha: hsla(var(--blue-hsl), 0.9);
   --blue-color-95-alpha: hsla(var(--blue-hsl), 0.95);
 }
+
+/* Named tint/shade aliases (Material-style) */
+:root {
+  /* base */
+  --base-color-light: var(--base-color-73-tint);
+  --base-color-super-light: var(--base-color-11-tint);
+  --base-color-dark: var(--base-color-40-shade);
+  --base-color-super-dark: var(--base-color-70-shade);
+
+  /* primary */
+  --primary-color-light: var(--primary-color-73-tint);
+  --primary-color-super-light: var(--primary-color-11-tint);
+  --primary-color-dark: var(--primary-color-40-shade);
+  --primary-color-super-dark: var(--primary-color-70-shade);
+
+  /* secondary */
+  --secondary-color-light: var(--secondary-color-73-tint);
+  --secondary-color-super-light: var(--secondary-color-11-tint);
+  --secondary-color-dark: var(--secondary-color-40-shade);
+  --secondary-color-super-dark: var(--secondary-color-70-shade);
+
+  /* accent */
+  --accent-color-light: var(--accent-color-73-tint);
+  --accent-color-super-light: var(--accent-color-11-tint);
+  --accent-color-dark: var(--accent-color-40-shade);
+  --accent-color-super-dark: var(--accent-color-70-shade);
+
+  /* black */
+  --black-color-light: var(--black-color-73-tint);
+  --black-color-super-light: var(--black-color-11-tint);
+  --black-color-dark: var(--black-color-40-shade);
+  --black-color-super-dark: var(--black-color-70-shade);
+
+  /* white */
+  --white-color-light: var(--white-color-73-tint);
+  --white-color-super-light: var(--white-color-11-tint);
+  --white-color-dark: var(--white-color-40-shade);
+  --white-color-super-dark: var(--white-color-70-shade);
+
+  /* green */
+  --green-color-light: var(--green-color-73-tint);
+  --green-color-super-light: var(--green-color-11-tint);
+  --green-color-dark: var(--green-color-40-shade);
+  --green-color-super-dark: var(--green-color-70-shade);
+
+  /* red */
+  --red-color-light: var(--red-color-73-tint);
+  --red-color-super-light: var(--red-color-11-tint);
+  --red-color-dark: var(--red-color-40-shade);
+  --red-color-super-dark: var(--red-color-70-shade);
+
+  /* yellow */
+  --yellow-color-light: var(--yellow-color-73-tint);
+  --yellow-color-super-light: var(--yellow-color-11-tint);
+  --yellow-color-dark: var(--yellow-color-40-shade);
+  --yellow-color-super-dark: var(--yellow-color-70-shade);
+
+  /* blue */
+  --blue-color-light: var(--blue-color-73-tint);
+  --blue-color-super-light: var(--blue-color-11-tint);
+  --blue-color-dark: var(--blue-color-40-shade);
+  --blue-color-super-dark: var(--blue-color-70-shade);
+
+  /* navy */
+  --navy-color-light: var(--navy-color-73-tint);
+  --navy-color-super-light: var(--navy-color-11-tint);
+  --navy-color-dark: var(--navy-color-40-shade);
+  --navy-color-super-dark: var(--navy-color-70-shade);
+
+  /* success/info/warning/fail */
+  --success-color-light: var(--success-color-73-tint);
+  --success-color-super-light: var(--success-color-11-tint);
+  --success-color-dark: var(--success-color-40-shade);
+  --success-color-super-dark: var(--success-color-70-shade);
+
+  --info-color-light: var(--info-color-73-tint);
+  --info-color-super-light: var(--info-color-11-tint);
+  --info-color-dark: var(--info-color-40-shade);
+  --info-color-super-dark: var(--info-color-70-shade);
+
+  --warning-color-light: var(--warning-color-73-tint);
+  --warning-color-super-light: var(--warning-color-11-tint);
+  --warning-color-dark: var(--warning-color-40-shade);
+  --warning-color-super-dark: var(--warning-color-70-shade);
+
+  --fail-color-light: var(--fail-color-73-tint);
+  --fail-color-super-light: var(--fail-color-11-tint);
+  --fail-color-dark: var(--fail-color-40-shade);
+  --fail-color-super-dark: var(--fail-color-70-shade);
+}

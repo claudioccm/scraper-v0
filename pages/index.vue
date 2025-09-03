@@ -12,7 +12,7 @@
     <p v-else>No blog posts found</p>
   </ccm-section>
 
-  <ccm-section background-color="base-color-light">
+  <ccm-section>
     <h2>Case Studies</h2>
     <div v-if="caseStudies && caseStudies.length > 0">
       <div v-for="study in caseStudies.slice(0, 3)" :key="study.path">
