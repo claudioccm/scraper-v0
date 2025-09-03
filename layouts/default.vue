@@ -8,6 +8,9 @@
   </div>
 </template>
 
+<script setup>
+</script>
+
 <style>
 .layout {
   min-height: 100svh;

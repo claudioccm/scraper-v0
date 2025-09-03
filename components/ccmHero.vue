@@ -11,12 +11,18 @@
 
 <script setup>
 const props = defineProps({
-  brow: String,
+  brow: {
+    type: String,
+    default: 'Brow'
+  },
   title: {
     type: String,
-    default: 'Welcome'
+    default: 'Hero'
   },
-  tagline: String
+  tagline: {
+    type: String,
+    default: 'Tagline'
+  }
 })
 </script>
 

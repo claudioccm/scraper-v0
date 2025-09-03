@@ -1,34 +1,32 @@
 <template>
-  <div>
-    <h1>Home</h1>
-    <section>
-      <h2>Latest Blog Posts</h2>
-      <div v-if="blogPosts && blogPosts.length > 0">
-        <div v-for="post in blogPosts.slice(0, 3)" :key="post.path">
-          <h3><NuxtLink :to="post.path">{{ post.title }}</NuxtLink></h3>
-          <p v-if="post.description">{{ post.description }}</p>
-          <small>{{ post.date ? new Date(post.date).toLocaleDateString() : 'No date' }}</small>
-        </div>
-        <NuxtLink to="/blog">View all blog posts →</NuxtLink>
+  <ccm-section>
+    <h2>Latest Blog Posts</h2>
+    <div v-if="blogPosts && blogPosts.length > 0">
+      <div v-for="post in blogPosts.slice(0, 3)" :key="post.path">
+        <h3><NuxtLink :to="post.path">{{ post.title }}</NuxtLink></h3>
+        <p v-if="post.description">{{ post.description }}</p>
+        <small>{{ post.date ? new Date(post.date).toLocaleDateString() : 'No date' }}</small>
       </div>
-      <p v-else>No blog posts found</p>
-    </section>
+      <NuxtLink to="/blog">View all blog posts →</NuxtLink>
+    </div>
+    <p v-else>No blog posts found</p>
+  </ccm-section>
 
-    <section>
-      <h2>Case Studies</h2>
-      <div v-if="caseStudies && caseStudies.length > 0">
-        <div v-for="study in caseStudies.slice(0, 3)" :key="study.path">
-          <h3><NuxtLink :to="study.path">{{ study.title }}</NuxtLink></h3>
-          <p v-if="study.description">{{ study.description }}</p>
-        </div>
-        <NuxtLink to="/case-studies">View all case studies →</NuxtLink>
+  <ccm-section background-color="base-color-light">
+    <h2>Case Studies</h2>
+    <div v-if="caseStudies && caseStudies.length > 0">
+      <div v-for="study in caseStudies.slice(0, 3)" :key="study.path">
+        <h3><NuxtLink :to="study.path">{{ study.title }}</NuxtLink></h3>
+        <p v-if="study.description">{{ study.description }}</p>
       </div>
-      <p v-else>No case studies found</p>
-    </section>
-  </div>
+      <NuxtLink to="/case-studies">View all case studies →</NuxtLink>
+    </div>
+    <p v-else>No case studies found</p>
+  </ccm-section>
 </template>
 
 <script setup>
+
 const { data: blogPosts } = await useAsyncData('home-blog-posts', async () => {
   const posts = await queryCollection('blog').all()
   // Since published field parsing is broken, just show all posts for now
