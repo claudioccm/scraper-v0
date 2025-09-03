@@ -10,6 +10,7 @@ The `ccm-card` component should be a robust, accessible, and progressively enhan
 
 The component should accept the following props:
 
+**Content Props:**
 - `href` (String, required): The URL for the card's primary link.
 - `title` (String, required): The main title for the card, which will also serve as the primary link text.
 - `description` (String, optional): A brief summary or description.
@@ -17,6 +18,12 @@ The component should accept the following props:
 - `imageAlt` (String, required if `imageUrl` is present): The alt text for the image. If the image is purely decorative, this should be an empty string (`""`).
 - `meta` (String, optional): Small metadata text, like an author's name or date.
 - `showCta` (Boolean, default: `false`): If `true`, displays a "Read More" visual cue.
+
+**Design Props:**
+- `variant` (String, default: `"default"`): Visual style variant (`default`, `elevated`, `outlined`, `filled`)
+- `color` (String, default: `"base"`): Color theme (`base`, `primary`, `secondary`, `accent`)
+- `size` (String, default: `"m"`): Size variant (`s`, `m`, `l`)
+- `layout` (String, default: `"vertical"`): Layout orientation (`vertical`, `horizontal`)
 
 ## 3. Markup Specification (HTML Structure)
 
@@ -51,23 +58,34 @@ The DOM order is critical for accessibility. Elements must be ordered as follows
 ```html
 <li class="ccm-card">
   <!-- Text content must come first in the DOM -->
-  <div class="card-text">
-    <h2>
-      <a href="/path-to-post" aria-describedby="cta-card-design-woes">
+  <div class="ccm-card__text">
+    <h2 class="ccm-card__title">
+      <a href="/path-to-post" class="ccm-card__link" aria-describedby="cta-card-design-woes">
         Card design woes
       </a>
     </h2>
-    <p>Ten common pitfalls to avoid when designing card components.</p>
-    <span class="cta" aria-hidden="true" id="cta-card-design-woes">Read more</span>
-    <small>By Heydon Pickering</small>
+    <p class="ccm-card__description">Ten common pitfalls to avoid when designing card components.</p>
+    <span class="ccm-card__cta" aria-hidden="true" id="cta-card-design-woes">Read more</span>
+    <small class="ccm-card__meta">By Heydon Pickering</small>
   </div>
 
   <!-- Image comes after text in the DOM -->
-  <div class="card-image">
-    <img src="/path/to/image.png" alt="A decorative illustration.">
+  <div class="ccm-card__image">
+    <img src="/path/to/image.png" alt="A decorative illustration." class="ccm-card__img">
   </div>
 </li>
 ```
+
+**CSS Class Structure:**
+- `.ccm-card` - Root component following project naming convention
+- `.ccm-card__text` - BEM modifier for text content wrapper
+- `.ccm-card__title` - Title/heading element
+- `.ccm-card__link` - Primary link element
+- `.ccm-card__description` - Description paragraph
+- `.ccm-card__cta` - Call-to-action element
+- `.ccm-card__meta` - Metadata element
+- `.ccm-card__image` - Image wrapper
+- `.ccm-card__img` - Image element
 
 ## 4. Behavior and Interactivity
 
@@ -80,18 +98,83 @@ The entire card should be clickable, not just the title link. This provides a la
 - The handler must check that the event target is not the primary link itself to avoid a double-firing event loop due to event bubbling.
 - To allow for text selection, the handler should detect the time between `mousedown` and `mouseup`. If the duration exceeds a threshold (e.g., 200ms), the click action should be suppressed.
 
-### 4.2. Example Script (Composition API)
+### 4.2. Example Script (Vue 3 Composition API)
 
 ```javascript
+<script setup>
 import { ref, onMounted } from 'vue';
 
+// Props following project patterns
+const props = defineProps({
+  // Content props
+  href: {
+    type: String,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  imageUrl: {
+    type: String,
+    default: ''
+  },
+  imageAlt: {
+    type: String,
+    default: ''
+  },
+  meta: {
+    type: String,
+    default: ''
+  },
+  showCta: {
+    type: Boolean,
+    default: false
+  },
+  // Design props
+  variant: {
+    type: String,
+    default: 'default',
+    validator: (value) => ['default', 'elevated', 'outlined', 'filled'].includes(value)
+  },
+  color: {
+    type: String,
+    default: 'base',
+    validator: (value) => ['base', 'primary', 'secondary', 'accent'].includes(value)
+  },
+  size: {
+    type: String,
+    default: 'm',
+    validator: (value) => ['s', 'm', 'l'].includes(value)
+  },
+  layout: {
+    type: String,
+    default: 'vertical',
+    validator: (value) => ['vertical', 'horizontal'].includes(value)
+  }
+});
+
+// Template refs
 const cardElement = ref(null);
 const primaryLink = ref(null);
 let down, up;
 
+// Generate unique ID for CTA aria-describedby
+const ctaId = computed(() => {
+  if (props.showCta && props.title) {
+    return `cta-${props.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`;
+  }
+  return null;
+});
+
+// Click handling for card interactivity
 onMounted(() => {
   if (cardElement.value) {
-    primaryLink.value = cardElement.value.querySelector('h2 a');
+    primaryLink.value = cardElement.value.querySelector('.ccm-card__link');
 
     cardElement.value.onmousedown = () => {
       down = +new Date();
@@ -107,31 +190,207 @@ onMounted(() => {
     };
   }
 });
+</script>
 ```
 
-## 5. Styling (CSS)
+## 5. Design Variants and Tokens
 
-### 5.1. Visual Order vs. Source Order
+### 5.1. Design Token Architecture
 
-- The card container (`<li>`) should use `display: flex` and `flex-direction: column`.
-- The text content wrapper (`<div class="card-text">`) should have `order: 1` to appear visually after the image.
-- The image wrapper (`<div class="card-image">`) should have `order: 0` (or simply come before the text wrapper visually by default if no `order` is specified on it) to appear at the top. This correctly separates the visual presentation from the accessible DOM order where text comes first.
+Following the project's button component pattern, the card uses CSS custom properties with `v-bind()` for dynamic theming:
 
+```css
+.ccm-card {
+  /* Core design tokens */
+  --_card-color-prop: v-bind(color);
+  --_card-variant-prop: v-bind(variant);
+  --_card-size-prop: v-bind(size);
+  
+  /* Color system (following button pattern) */
+  --_card-hsl: var(--_card-color-prop, var(--base-hsl));
+  --_card-color: hsl(var(--_card-hsl));
+  --_card-background-color: transparent;
+  --_card-border-color: var(--_card-color);
+  
+  /* Border design tokens */
+  --_card-border-width: var(--base-border-width, 1px);
+  --_card-border-style: var(--base-border-style, solid);
+  
+  /* Radius design tokens */
+  --_card-border-radius: var(--border-radius-m);
+  
+  /* Spacing tokens */
+  --_card-padding-block: var(--space-m);
+  --_card-padding-inline: var(--space-m);
+  --_card-gap: var(--space-s);
+}
+```
 
-### 5.2. Focus States
+### 5.2. Color Variants
 
-- When the primary link is focused, a clear visual focus indicator must be present.
-- If `showCta` is `true`, `:focus-within` can be used on the card or title wrapper to apply focus styles to the decorative CTA `span` when the link is focused, making it clear which element is active.
+Color variants leverage the existing HSL color system:
 
-### 5.3. Touch Targets
+```css
+.ccm-card[color="base"] { --_card-hsl: var(--base-hsl); }
+.ccm-card[color="primary"] { --_card-hsl: var(--primary-hsl); }
+.ccm-card[color="secondary"] { --_card-hsl: var(--secondary-hsl); }
+.ccm-card[color="accent"] { --_card-hsl: var(--accent-hsl); }
+```
 
-- All interactive elements, especially the primary link, should have sufficient padding to be easily tappable on touch devices.
+### 5.3. Visual Variants
 
-## 6. Accessibility (A11y) Recap
+Visual variants affect border, background, and shadow properties:
 
-- **Landmarks**: Cards must be grouped within a `<ul>` or `<ol>`.
-- **Headings**: The card title must be a heading (`<h2>`, `<h3>`, etc.) to facilitate navigation for screen reader users.
-- **Link Text**: Link text is descriptive and unique (e.g., the post title), not generic ("Read more").
-- **Images**: `alt` text is mandatory. Use `""` for decorative images.
-- **ARIA**: `aria-hidden` and `aria-describedby` are used correctly to create a seamless experience for the optional CTA, avoiding redundant tab stops and providing clear context.
-- **Source Order**: The logical content order is preserved in the DOM, with visual changes handled by CSS.
+```css
+.ccm-card[variant="default"] {
+  --_card-border-width: 1px;
+  --_card-background-color: var(--base-color-02-tint);
+  --_card-border-color: var(--base-color-10-tint);
+}
+
+.ccm-card[variant="elevated"] {
+  --_card-border-width: 0;
+  --_card-background-color: var(--white-color);
+  box-shadow: var(--box-shadow-m);
+}
+
+.ccm-card[variant="outlined"] {
+  --_card-border-width: 2px;
+  --_card-background-color: transparent;
+  --_card-border-color: hsl(var(--_card-hsl));
+}
+
+.ccm-card[variant="filled"] {
+  --_card-border-width: 0;
+  --_card-background-color: var(--base-color-05-alpha);
+  --_card-border-color: hsl(var(--_card-hsl));
+}
+```
+
+### 5.4. Size Variants
+
+Size variants systematically scale padding, radius, and spacing:
+
+```css
+.ccm-card[size="s"] {
+  --_card-padding-block: var(--space-s);
+  --_card-padding-inline: var(--space-s);
+  --_card-border-radius: var(--border-radius-s);
+  --_card-gap: var(--space-xs);
+}
+
+.ccm-card[size="l"] {
+  --_card-padding-block: var(--space-l);
+  --_card-padding-inline: var(--space-l);
+  --_card-border-radius: var(--border-radius-l);
+  --_card-gap: var(--space-m);
+}
+```
+
+### 5.5. Design Token Reference
+
+**Border Width Tokens:**
+- `1px` - Subtle outline (default)
+- `2px` - Emphasized border (outlined variant)
+- `0` - No border (elevated, filled variants)
+
+**Border Radius Tokens:**
+- `--border-radius-s` (4px) - Small cards, compact layouts
+- `--border-radius-m` (8px) - Default cards
+- `--border-radius-l` (12px) - Large feature cards
+
+**Color Integration:**
+- Leverages existing HSL color system with tints/shades/alpha variations
+- `--base-color-02-tint`, `--base-color-10-tint` for subtle backgrounds/borders
+- `--base-color-05-alpha` for filled variant transparency
+
+## 6. Styling (CSS)
+
+### 6.1. CSS Architecture Integration
+
+This component must integrate with the existing CSS architecture:
+
+- **CSS Layers**: The component styles should be added to the `components` layer
+- **CSS Variables**: Use existing design tokens from the project's variable system
+- **Spacing**: Use the project's fluid spacing system (e.g., `var(--space-s)`, `var(--space-m)`, `var(--space-l)`)
+- **Colors**: Leverage the existing color system with HSL values and tint/shade utilities
+
+### 6.2. Available Design Tokens
+
+**Spacing Variables (from space.css):**
+- `--space-3xs` through `--space-3xl` for consistent spacing
+- `--space-s-m`, `--space-m-l` for fluid spacing pairs
+- Use spacing utilities: `.padding-block:s`, `.margin-inline:auto`, etc.
+
+**Color Variables (from colors.css):**
+- Base colors: `--base-color`, `--primary-color`, `--secondary-color`, `--accent-color`
+- Tints: `--base-color-10-tint`, `--base-color-20-tint`, etc.
+- Alpha variations: `--base-color-10-alpha`, `--base-color-20-alpha`, etc.
+
+**Layout Utilities (from everylayout.css):**
+- `.stack` for vertical rhythm
+- `.cluster` for horizontal grouping
+- `.center` for content centering
+
+**Effects and Borders:**
+- `--border-radius-s`, `--border-radius-m`, `--border-radius-l`
+- `--box-shadow-s`, `--box-shadow-m`, `--box-shadow-l`
+- `--base-separator` for consistent borders
+
+### 6.3. Visual Order vs. Source Order
+
+- The card container (`<li>`) should use `display: flex` and `flex-direction: column`
+- The text content wrapper should have `order: 1` to appear visually after the image
+- The image wrapper should have `order: 0` to appear at the top
+- This separates visual presentation from accessible DOM order
+
+### 6.4. Focus States
+
+- Use existing focus utilities and variables from the design system
+- When the primary link is focused, apply consistent focus indicators
+- If `showCta` is `true`, use `:focus-within` on the card wrapper
+
+### 6.5. Touch Targets
+
+- Use the project's spacing variables for adequate touch targets
+- Apply `var(--space-s)` minimum for interactive padding
+- Ensure links have sufficient `padding-inline` and `padding-block`
+
+## 7. Accessibility (A11y) Recap
+
+- **Landmarks**: Cards must be grouped within a `<ul>` or `<ol>`
+- **Headings**: The card title must be a heading (`<h2>`, `<h3>`, etc.) to facilitate navigation for screen reader users
+- **Link Text**: Link text is descriptive and unique (e.g., the post title), not generic ("Read more")
+- **Images**: `alt` text is mandatory. Use `""` for decorative images
+- **ARIA**: `aria-hidden` and `aria-describedby` are used correctly to create a seamless experience for the optional CTA, avoiding redundant tab stops and providing clear context
+- **Source Order**: The logical content order is preserved in the DOM, with visual changes handled by CSS
+- **Focus Management**: Use project's existing focus indicators and ensure consistent focus behavior
+
+## 8. Implementation Notes
+
+### 8.1. Component File Location
+- Place in `/components/ccmCard.vue` following project naming convention
+- Component will be auto-imported due to Nuxt 3 configuration
+
+### 8.2. CSS File Organization
+- Add component styles to `/public/css/components/ccm-card.css`
+- Import in main styles.css: `@import "components/ccm-card.css" layer(components);`
+- Follow existing CSS layer methodology
+
+### 8.3. Vue 3 Integration
+- Use Composition API consistently with project patterns
+- Follow existing prop definition patterns from other ccm components
+- Implement template refs and event handling as shown in example
+
+### 8.4. Design Token Usage
+- Leverage existing spacing variables for consistent padding/margins
+- Use color system variables for theming capabilities
+- Apply existing border-radius and box-shadow tokens
+- Utilize utility classes where appropriate (`.cluster`, `.stack`, spacing utilities)
+
+### 8.5. Testing Considerations
+- Ensure component works within existing `<ul>` contexts
+- Test with various content lengths and image sizes
+- Validate accessibility with screen readers
+- Test click/touch interaction across devices
+- Verify focus states and keyboard navigation
