@@ -1,6 +1,8 @@
 <template>
-  <section class="base-section | subgrid" :background-color="backgroundColor" >
-    <slot />
+  <section :background-color="backgroundColor">
+    <div class="center">
+      <slot />
+    </div>
   </section>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
-  <component 
-    class="button" 
+  <component
     :is="componentEl"
     :mobile="mobile"
     :unstyled="unstyled"

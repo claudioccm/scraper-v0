@@ -1,5 +1,5 @@
 <template>
-  <div class="footer | subgrid">
+  <div>
     <h1>Footer</h1>
   </div>
 </template>
@@ -10,9 +10,5 @@
 
 <style scoped>
 .footer {
-  background-color: green;
-  display: grid;
-  grid-column: full-start / full-end;
-  z-index: 1;
 }
 </style>

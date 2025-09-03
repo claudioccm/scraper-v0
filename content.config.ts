@@ -4,11 +4,21 @@ export default defineContentConfig({
   collections: {
     blog: defineCollection({
       type: 'page',
-      source: 'blog/*.md'
+      source: 'blog/*.md',
+      schema: {
+        published: 'boolean'
+      }
     }),
     casestudies: defineCollection({
       type: 'page',
-      source: 'case-studies/*.md'
+      source: 'case-studies/*.md',
+      schema: {
+        published: 'boolean'
+      }
+    }),
+    services: defineCollection({
+      type: 'page',
+      source: 'services/*.md'
     })
   }
 })

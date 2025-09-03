@@ -1,7 +1,7 @@
 <template>
-  <div class="master-grid">
+  <div>
     <slot>
-      <div class="aux-card" v-for="i in 47" :key="i">
+      <div v-for="i in 47" :key="i">
         <p>Aux Card</p>
       </div>
     </slot>

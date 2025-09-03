@@ -1,6 +1,6 @@
 <template>
-  <div class="by-line | subgrid">
-    <div class="by-line__content | cluster">
+  <div>
+    <div>
       <span>© {{ new Date().getFullYear() }} GovLab</span>
       <a href="#" split-left>by ccm.design</a>
     </div>

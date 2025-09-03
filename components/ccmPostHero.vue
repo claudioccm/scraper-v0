@@ -1,6 +1,6 @@
 <template>
-  <div class="ccm-post-hero full-width" :title="title" :brow="brow" :date="date" :author="author" :tags="tags" :tagline="tagline">
-    <div class="content | stack">
+  <div :title="title" :brow="brow" :date="date" :author="author" :tags="tags" :tagline="tagline">
+    <div>
       <NuxtLink to="/blog">Back to Blog</NuxtLink>
       <h4>{{ brow }}</h4>
       <h1>{{ title }}</h1>
@@ -11,7 +11,7 @@
         <span v-for="(tag, i) in tags" :key="tag">
           <NuxtLink :to="`/blog/tag/${encodeURIComponent(tag)}`">{{ tag }}</NuxtLink><span v-if="i < tags.length - 1">, </span>
         </span>
-      </p>  
+      </p>
     </div>
   </div>
 </template>
