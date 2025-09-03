@@ -1,10 +1,13 @@
 <template>
-  <div :title="title" :brow="brow" :date="date" :author="author" :tags="tags" :tagline="tagline">
-    <div class="ccm-post-hero__content">
-      <NuxtLink to="/blog">Back to Blog</NuxtLink>
-      <h4>{{ brow }}</h4>
-      <h1>{{ title }}</h1>
-      <h3>{{ tagline }}</h3>
+  <header :title="title" :brow="brow" :date="date" :author="author" :tags="tags" :tagline="tagline">
+    <div class="ccm-hero-container | center">
+      <ccm-topbar />
+      <hgroup>
+        <NuxtLink to="/blog">Back to Blog</NuxtLink>
+        <h4>{{ brow }}</h4>
+        <h1>{{ title }}</h1>
+        <h3>{{ tagline }}</h3>
+      </hgroup>
       <p>Published {{ formatDate(date, 'MMM d, yyyy') }} by {{ author }}</p>
       <p>
         Tags:
@@ -13,7 +16,7 @@
         </span>
       </p>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup>

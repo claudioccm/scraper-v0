@@ -1,8 +1,10 @@
 <template>
   <ccm-section>
     <h2>Case Studies</h2>
-    <div v-for="study in caseStudies" :key="study._path">
-      <NuxtLink :to="study.path">{{ study.title || study._path }}</NuxtLink>
+    <div class="stack">
+      <ccm-card v-for="study in caseStudies" :key="study._path">
+        <NuxtLink :to="study.path">{{ study.title || study._path }}</NuxtLink>
+      </ccm-card>
     </div>
   </ccm-section>
 </template>

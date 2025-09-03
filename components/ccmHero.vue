@@ -1,12 +1,16 @@
 <template>
-  <header class="ccm-hero" :background-color="backgroundColor" :size="size">
+  <header class="ccm-hero" :background-color="backgroundColor" :size="size" :hide-topbar="hideTopbar">
     <div class="ccm-hero-container | center">
-      <ccm-topbar />
-      <hgroup>
-        <span v-if="brow">{{ brow }}</span>
-        <h1>{{ title }}</h1>
-        <p v-if="tagline">{{ tagline }}</p>
-      </hgroup>  
+      
+      <ccm-topbar v-if="!hideTopbar" />
+      
+      <slot>
+        <hgroup>
+          <span v-if="brow">{{ brow }}</span>
+          <h1>{{ title }}</h1>
+          <p v-if="tagline">{{ tagline }}</p>
+        </hgroup>  
+      </slot>
     </div>
   </header>
 </template>
@@ -32,6 +36,10 @@ const props = defineProps({
   size: {
     type: String,
     default: 'l'
+  },
+  hideTopbar: {
+    type: Boolean,
+    default: false
   }
 })
 </script>

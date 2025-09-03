@@ -7,13 +7,15 @@
   </ccm-section>
   <ccm-section v-if="services && services.length > 0">
     <h2>How We Can Help</h2>
-    <div v-for="service in services" :key="service.path">
-      <h2><NuxtLink :to="service.slug || service.path">{{ service.title }}</NuxtLink></h2>
-      <div v-if="service.status">
-      </div>
-      <div>
-        
-      </div>
+    <div class="stack">
+      <ccm-card v-for="service in services" :key="service.path">
+        <h2><NuxtLink :to="service.slug || service.path">{{ service.title }}</NuxtLink></h2>
+        <div v-if="service.status">
+        </div>
+        <div>
+          
+        </div>
+      </ccm-card>
     </div>
   </ccm-section>
 

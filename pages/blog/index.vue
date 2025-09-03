@@ -7,9 +7,10 @@
       [Filter/Sort Component: "Designing for Policy & Research," "The Craft of Knowledge Products," "Ethical Technology & Social Impact"]
       [Article Grid Component: Displays a grid of all migrated articles, filterable by the pillars above. Each card should show the article title, a brief excerpt, and the publication date.]
     </pre>
-    
-    <div v-for="post in blogPosts" :key="post._path">
-      <NuxtLink :to="post.path">{{ post.title || post._path }}</NuxtLink>
+    <div class="stack">
+    <ccm-card v-for="post in blogPosts" :key="post._path">
+        <NuxtLink :to="post.path">{{ post.title || post._path }}</NuxtLink>
+      </ccm-card>
     </div>
   </ccm-section>
   <ccm-section>

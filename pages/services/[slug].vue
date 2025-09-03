@@ -1,32 +1,28 @@
 <template>
-  <div>
-    <div v-if="service">
-      <h1>{{ service.title }}</h1>
-
-      <div v-if="service.status">
-        <span>{{ service.status }}</span>
-      </div>
-
-      <!-- Service Content -->
-      <div>
+  <ccm-hero />
+  
+  <ccm-section>
+    <div class="service | prose">
+      <div v-if="service">
         <ContentRenderer :value="service" />
+        <NuxtLink to="/services">← Back to Services</NuxtLink>
       </div>
 
-      <!-- Back to Services -->
-      <div>
+      <div v-else>
+        <h1>Service Not Found</h1>
+        <p>Sorry, the requested service could not be found.</p>
         <NuxtLink to="/services">← Back to Services</NuxtLink>
       </div>
     </div>
-
-    <div v-else>
-      <h1>Service Not Found</h1>
-      <p>Sorry, the requested service could not be found.</p>
-      <NuxtLink to="/services">← Back to Services</NuxtLink>
-    </div>
-  </div>
+  </ccm-section>
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'article-layout'
+})
+
+
 const route = useRoute()
 const slug = route.params.slug
 
@@ -69,98 +65,5 @@ useHead({
 </script>
 
 <style scoped>
-.service-meta {
-  margin: 1rem 0 2rem 0;
-}
 
-.status-draft {
-  background-color: #fef3c7;
-  color: #92400e;
-  padding: 0.25rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  display: inline-block;
-}
-
-.service-content {
-  max-width: 65ch;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.service-content :deep(h1) {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #1f2937;
-}
-
-.service-content :deep(h2) {
-  font-size: 1.875rem;
-  margin: 2rem 0 1rem 0;
-  color: #1f2937;
-  border-bottom: 2px solid #e5e7eb;
-  padding-bottom: 0.5rem;
-}
-
-.service-content :deep(h3) {
-  font-size: 1.5rem;
-  margin: 1.5rem 0 0.75rem 0;
-  color: #374151;
-}
-
-.service-content :deep(p) {
-  margin-bottom: 1rem;
-  color: #4b5563;
-}
-
-.service-content :deep(ul) {
-  margin: 1rem 0;
-  padding-left: 1.5rem;
-}
-
-.service-content :deep(li) {
-  margin-bottom: 0.5rem;
-  color: #4b5563;
-}
-
-.service-content :deep(strong) {
-  font-weight: 600;
-  color: #1f2937;
-}
-
-.back-link {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid #e5e7eb;
-}
-
-.back-link a {
-  color: #3b82f6;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.back-link a:hover {
-  text-decoration: underline;
-}
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: #1f2937;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.25rem;
-  }
-
-  .service-content {
-    max-width: 100%;
-    padding: 0 1rem;
-  }
-}
 </style>

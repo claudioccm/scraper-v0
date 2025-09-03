@@ -47,8 +47,5 @@ useHead({
 </script>
 
 <style>
-.prose-layout {
-  --padding-inline: 1rem;
-  --_prose-max-width: 70ch;
-}
+
 </style>
