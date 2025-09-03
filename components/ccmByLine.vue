@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <div>
-      <span>© {{ new Date().getFullYear() }} GovLab</span>
-      <a href="#" split-left>by ccm.design</a>
+    <div class="by-line | cluster">
+      <span>© {{ new Date().getFullYear() }} CCM Design</span>
+      <a href="#" class="margin-left:auto">by ccm.design</a>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -12,18 +10,4 @@
 
 <style scoped>
 
-/* By Line Layout - SubGrid */
-
-.by-line {
-  display: grid;
-  grid-template-columns: subgrid;
-  grid-column: full-start / full-end;
-  font-size: var(--size--2);
-  padding-block: var(--space-l) var(--space-s);
-}
-
-.by-line__content {
-  grid-column: content-start / content-end;
-  --_cluster-space: var(--space-xs);
-}
 </style>

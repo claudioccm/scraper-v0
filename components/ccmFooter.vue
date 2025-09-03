@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Footer</h1>
+    <ccm-by-line />
   </div>
 </template>
 
@@ -9,6 +10,4 @@
 </script>
 
 <style scoped>
-.footer {
-}
 </style>
