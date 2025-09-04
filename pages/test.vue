@@ -4,12 +4,12 @@
     <p>This is the default <code>ccm-section</code> with no props.</p>
   </ccm-section>
 
-  <ccm-section color="primary">
+  <ccm-section size="m" background-color="primary">
     <h2>Primary Color Section</h2>
     <p>This section uses <code>color="primary"</code> for a primary palette background.</p>
   </ccm-section>
 
-  <ccm-section color="secondary">
+  <ccm-section size="s" background-color="secondary">
     <h2>Secondary Color Section</h2>
     <p>This section uses <code>color="secondary"</code> for a secondary palette background.</p>
   </ccm-section>

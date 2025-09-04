@@ -1,0 +1,23 @@
+/* Color Values */
+:root {
+  --hsl-white: 255, 100%, 100%;
+  --hsl-black: 0, 0%, 3%;
+
+  --hsl-red: 352, 59%, 55%;
+  --hsl-yellow: 36 83%, 61%;
+  --hsl-blue: 208, 50%, 38%;
+  --hsl-navy: 201, 100%, 18%;
+  --hsl-green: 188, 97%, 28%;
+}
+
+/* Solid Colors */
+:root {
+  --color-white: hsl(var(--hsl-white));
+  --color-black: hsl(var(--hsl-black));
+
+  --color-red: hsl(var(--hsl-red));
+  --color-yellow: hsl(var(--hsl-yellow));
+  --color-blue: hsl(var(--hsl-blue));
+  --color-navy: hsl(var(--hsl-navy));
+  --color-green: hsl(var(--hsl-green));
+}

@@ -1,19 +1,24 @@
 /* Syntax for ordering layers */
-@layer reset, defaults, components, utils, overrides;
+@layer reset, defaults, tokens, themes, components, utils, overrides;
 
 /* Reset Layer */
 
 @import "base/reset.css" layer(reset);
+@import 'base/everylayout.css' layer(defaults);
+@import "base/typography.css" layer(defaults);
 
 /* Defaults Layer */
-@import 'base/fonts.css' layer(defaults);
+@import 'tokens/fonts.css' layer(tokens);
+@import 'tokens/primitive-colors.css' layer(tokens);
+@import 'tokens/primitive-colors-shades-and-tints.css' layer(tokens);
+@import 'tokens/primitive-spacing.css' layer(tokens);
+@import 'tokens/primitive-misc.css' layer(tokens);
 
-@import 'vars/colors.css' layer(defaults);
-@import 'vars/space.css' layer(defaults);
-@import 'vars/vars.css' layer(defaults);
+@import 'tokens/semantic-colors.css' layer(tokens);
+@import 'tokens/semantic-colors-shades-and-tints.css' layer(tokens);
+@import 'tokens/semantic-spacing.css' layer(tokens);
+@import 'tokens/semantic-misc.css' layer(tokens);
 
-@import "base/typography.css" layer(defaults);
-@import 'base/everylayout.css' layer(defaults);
 
 @import "components/prose.css" layer(components);
 
@@ -24,8 +29,6 @@
 @import "utils/space-utils.css" layer(utils);
 
 @import "utils/utils.css" layer(utils);
-
-
 
 /* Development Styles */
 @import "dev.css" layer(overrides);

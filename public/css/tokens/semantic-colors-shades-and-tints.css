@@ -1,0 +1,348 @@
+/* Color Mix | Tints */
+:root {
+  
+  --color-primary-tint-98: color-mix(in srgb, var(--color-primary) 98%, white 2%);
+  --color-primary-tint-90: color-mix(in srgb, var(--color-primary) 90%, white 10%);
+  --color-primary-tint-80: color-mix(in srgb, var(--color-primary) 80%, white 20%);
+  --color-primary-tint-73: color-mix(in srgb, var(--color-primary) 73%, white 27%);
+  --color-primary-tint-70: color-mix(in srgb, var(--color-primary) 70%, white 30%);
+  --color-primary-tint-60: color-mix(in srgb, var(--color-primary) 60%, white 40%);
+  --color-primary-tint-50: color-mix(in srgb, var(--color-primary) 50%, white 50%);
+  --color-primary-tint-40: color-mix(in srgb, var(--color-primary) 40%, white 60%);
+  --color-primary-tint-30: color-mix(in srgb, var(--color-primary) 30%, white 70%);
+  --color-primary-tint-20: color-mix(in srgb, var(--color-primary) 20%, white 80%);
+  --color-primary-tint-11: color-mix(in srgb, var(--color-primary) 11%, white 89%);
+  --color-primary-tint-10: color-mix(in srgb, var(--color-primary) 10%, white 90%);
+  --color-primary-tint-05: color-mix(in srgb, var(--color-primary) 5%, white 95%);
+  --color-primary-tint-02: color-mix(in srgb, var(--color-primary) 2%, white 98%);
+
+  --color-secondary-tint-98: color-mix(in srgb, var(--color-secondary) 98%, white 2%);
+  --color-secondary-tint-90: color-mix(in srgb, var(--color-secondary) 90%, white 10%);
+  --color-secondary-tint-80: color-mix(in srgb, var(--color-secondary) 80%, white 20%);
+  --color-secondary-tint-73: color-mix(in srgb, var(--color-secondary) 73%, white 27%);
+  --color-secondary-tint-70: color-mix(in srgb, var(--color-secondary) 70%, white 30%);
+  --color-secondary-tint-60: color-mix(in srgb, var(--color-secondary) 60%, white 40%);
+  --color-secondary-tint-50: color-mix(in srgb, var(--color-secondary) 50%, white 50%);
+  --color-secondary-tint-40: color-mix(in srgb, var(--color-secondary) 40%, white 60%);
+  --color-secondary-tint-30: color-mix(in srgb, var(--color-secondary) 30%, white 70%);
+  --color-secondary-tint-20: color-mix(in srgb, var(--color-secondary) 20%, white 80%);
+  --color-secondary-tint-11: color-mix(in srgb, var(--color-secondary) 11%, white 89%);
+  --color-secondary-tint-10: color-mix(in srgb, var(--color-secondary) 10%, white 90%);
+  --color-secondary-tint-05: color-mix(in srgb, var(--color-secondary) 5%, white 95%);
+  --color-secondary-tint-02: color-mix(in srgb, var(--color-secondary) 2%, white 98%);
+
+  --color-accent-tint-98: color-mix(in srgb, var(--color-accent) 98%, white 2%);
+  --color-accent-tint-90: color-mix(in srgb, var(--color-accent) 90%, white 10%);
+  --color-accent-tint-80: color-mix(in srgb, var(--color-accent) 80%, white 20%);
+  --color-accent-tint-73: color-mix(in srgb, var(--color-accent) 73%, white 27%);
+  --color-accent-tint-70: color-mix(in srgb, var(--color-accent) 70%, white 30%);
+  --color-accent-tint-60: color-mix(in srgb, var(--color-accent) 60%, white 40%);
+  --color-accent-tint-50: color-mix(in srgb, var(--color-accent) 50%, white 50%);
+  --color-accent-tint-40: color-mix(in srgb, var(--color-accent) 40%, white 60%);
+  --color-accent-tint-30: color-mix(in srgb, var(--color-accent) 30%, white 70%);
+  --color-accent-tint-20: color-mix(in srgb, var(--color-accent) 20%, white 80%);
+  --color-accent-tint-11: color-mix(in srgb, var(--color-accent) 11%, white 89%);
+  --color-accent-tint-10: color-mix(in srgb, var(--color-accent) 10%, white 90%);
+  --color-accent-tint-05: color-mix(in srgb, var(--color-accent) 5%, white 95%);
+  --color-accent-tint-02: color-mix(in srgb, var(--color-accent) 2%, white 98%);
+
+  --color-success-tint-98: color-mix(in srgb, var(--color-success) 98%, white 2%);
+  --color-success-tint-90: color-mix(in srgb, var(--color-success) 90%, white 10%);
+  --color-success-tint-80: color-mix(in srgb, var(--color-success) 80%, white 20%);
+  --color-success-tint-73: color-mix(in srgb, var(--color-success) 73%, white 27%);
+  --color-success-tint-70: color-mix(in srgb, var(--color-success) 70%, white 30%);
+  --color-success-tint-60: color-mix(in srgb, var(--color-success) 60%, white 40%);
+  --color-success-tint-50: color-mix(in srgb, var(--color-success) 50%, white 50%);
+  --color-success-tint-40: color-mix(in srgb, var(--color-success) 40%, white 60%);
+  --color-success-tint-30: color-mix(in srgb, var(--color-success) 30%, white 70%);
+  --color-success-tint-20: color-mix(in srgb, var(--color-success) 20%, white 80%);
+  --color-success-tint-11: color-mix(in srgb, var(--color-success) 11%, white 89%);
+  --color-success-tint-10: color-mix(in srgb, var(--color-success) 10%, white 90%);
+  --color-success-tint-05: color-mix(in srgb, var(--color-success) 5%, white 95%);
+  --color-success-tint-02: color-mix(in srgb, var(--color-success) 2%, white 98%);
+
+  --color-fail-tint-98: color-mix(in srgb, var(--color-fail) 98%, white 2%);
+  --color-fail-tint-90: color-mix(in srgb, var(--color-fail) 90%, white 10%);
+  --color-fail-tint-80: color-mix(in srgb, var(--color-fail) 80%, white 20%);
+  --color-fail-tint-73: color-mix(in srgb, var(--color-fail) 73%, white 27%);
+  --color-fail-tint-70: color-mix(in srgb, var(--color-fail) 70%, white 30%);
+  --color-fail-tint-60: color-mix(in srgb, var(--color-fail) 60%, white 40%);
+  --color-fail-tint-50: color-mix(in srgb, var(--color-fail) 50%, white 50%);
+  --color-fail-tint-40: color-mix(in srgb, var(--color-fail) 40%, white 60%);
+  --color-fail-tint-30: color-mix(in srgb, var(--color-fail) 30%, white 70%);
+  --color-fail-tint-20: color-mix(in srgb, var(--color-fail) 20%, white 80%);
+  --color-fail-tint-11: color-mix(in srgb, var(--color-fail) 11%, white 89%);
+  --color-fail-tint-10: color-mix(in srgb, var(--color-fail) 10%, white 90%);
+  --color-fail-tint-05: color-mix(in srgb, var(--color-fail) 5%, white 95%);
+  --color-fail-tint-02: color-mix(in srgb, var(--color-fail) 2%, white 98%);
+
+  --color-warning-tint-98: color-mix(in srgb, var(--color-warning) 98%, white 2%);
+  --color-warning-tint-90: color-mix(in srgb, var(--color-warning) 90%, white 10%);
+  --color-warning-tint-80: color-mix(in srgb, var(--color-warning) 80%, white 20%);
+  --color-warning-tint-73: color-mix(in srgb, var(--color-warning) 73%, white 27%);
+  --color-warning-tint-70: color-mix(in srgb, var(--color-warning) 70%, white 30%);
+  --color-warning-tint-60: color-mix(in srgb, var(--color-warning) 60%, white 40%);
+  --color-warning-tint-50: color-mix(in srgb, var(--color-warning) 50%, white 50%);
+  --color-warning-tint-40: color-mix(in srgb, var(--color-warning) 40%, white 60%);
+  --color-warning-tint-30: color-mix(in srgb, var(--color-warning) 30%, white 70%);
+  --color-warning-tint-20: color-mix(in srgb, var(--color-warning) 20%, white 80%);
+  --color-warning-tint-11: color-mix(in srgb, var(--color-warning) 11%, white 89%);
+  --color-warning-tint-10: color-mix(in srgb, var(--color-warning) 10%, white 90%);
+  --color-warning-tint-05: color-mix(in srgb, var(--color-warning) 5%, white 95%);
+  --color-warning-tint-02: color-mix(in srgb, var(--color-warning) 2%, white 98%);
+
+  --color-info-tint-98: color-mix(in srgb, var(--color-info) 98%, white 2%);
+  --color-info-tint-90: color-mix(in srgb, var(--color-info) 90%, white 10%);
+  --color-info-tint-80: color-mix(in srgb, var(--color-info) 80%, white 20%);
+  --color-info-tint-73: color-mix(in srgb, var(--color-info) 73%, white 27%);
+  --color-info-tint-70: color-mix(in srgb, var(--color-info) 70%, white 30%);
+  --color-info-tint-60: color-mix(in srgb, var(--color-info) 60%, white 40%);
+  --color-info-tint-50: color-mix(in srgb, var(--color-info) 50%, white 50%);
+  --color-info-tint-40: color-mix(in srgb, var(--color-info) 40%, white 60%);
+  --color-info-tint-30: color-mix(in srgb, var(--color-info) 30%, white 70%);
+  --color-info-tint-20: color-mix(in srgb, var(--color-info) 20%, white 80%);
+  --color-info-tint-11: color-mix(in srgb, var(--color-info) 11%, white 89%);
+  --color-info-tint-10: color-mix(in srgb, var(--color-info) 10%, white 90%);
+  --color-info-tint-05: color-mix(in srgb, var(--color-info) 5%, white 95%);
+}
+
+/* Color Mix | Shade */
+:root {
+  --color-primary-shade-98: color-mix(in srgb, var(--color-primary) 98%, black 2%);
+  --color-primary-shade-90: color-mix(in srgb, var(--color-primary) 90%, black 10%);
+  --color-primary-shade-80: color-mix(in srgb, var(--color-primary) 80%, black 20%);
+  --color-primary-shade-73: color-mix(in srgb, var(--color-primary) 73%, black 27%);
+  --color-primary-shade-70: color-mix(in srgb, var(--color-primary) 70%, black 30%);
+  --color-primary-shade-60: color-mix(in srgb, var(--color-primary) 60%, black 40%);
+  --color-primary-shade-50: color-mix(in srgb, var(--color-primary) 50%, black 50%);
+  --color-primary-shade-40: color-mix(in srgb, var(--color-primary) 40%, black 60%);
+  --color-primary-shade-30: color-mix(in srgb, var(--color-primary) 30%, black 70%);
+  --color-primary-shade-20: color-mix(in srgb, var(--color-primary) 20%, black 80%);
+  --color-primary-shade-11: color-mix(in srgb, var(--color-primary) 11%, black 89%);
+  --color-primary-shade-10: color-mix(in srgb, var(--color-primary) 10%, black 90%);
+  --color-primary-shade-05: color-mix(in srgb, var(--color-primary) 5%, black 95%);
+  --color-primary-shade-02: color-mix(in srgb, var(--color-primary) 2%, black 98%);
+
+  --color-secondary-shade-98: color-mix(in srgb, var(--color-secondary) 98%, black 2%);
+  --color-secondary-shade-90: color-mix(in srgb, var(--color-secondary) 90%, black 10%);
+  --color-secondary-shade-80: color-mix(in srgb, var(--color-secondary) 80%, black 20%);
+  --color-secondary-shade-73: color-mix(in srgb, var(--color-secondary) 73%, black 27%);
+  --color-secondary-shade-70: color-mix(in srgb, var(--color-secondary) 70%, black 30%);
+  --color-secondary-shade-60: color-mix(in srgb, var(--color-secondary) 60%, black 40%);
+  --color-secondary-shade-50: color-mix(in srgb, var(--color-secondary) 50%, black 50%);
+  --color-secondary-shade-40: color-mix(in srgb, var(--color-secondary) 40%, black 60%);
+  --color-secondary-shade-30: color-mix(in srgb, var(--color-secondary) 30%, black 70%);
+  --color-secondary-shade-20: color-mix(in srgb, var(--color-secondary) 20%, black 80%);
+  --color-secondary-shade-11: color-mix(in srgb, var(--color-secondary) 11%, black 89%);
+  --color-secondary-shade-10: color-mix(in srgb, var(--color-secondary) 10%, black 90%);
+  --color-secondary-shade-05: color-mix(in srgb, var(--color-secondary) 5%, black 95%);
+  --color-secondary-shade-02: color-mix(in srgb, var(--color-secondary) 2%, black 98%);
+
+  --color-accent-shade-98: color-mix(in srgb, var(--color-accent) 98%, black 2%);
+  --color-accent-shade-90: color-mix(in srgb, var(--color-accent) 90%, black 10%);
+  --color-accent-shade-80: color-mix(in srgb, var(--color-accent) 80%, black 20%);
+  --color-accent-shade-73: color-mix(in srgb, var(--color-accent) 73%, black 27%);
+  --color-accent-shade-70: color-mix(in srgb, var(--color-accent) 70%, black 30%);
+  --color-accent-shade-60: color-mix(in srgb, var(--color-accent) 60%, black 40%);
+  --color-accent-shade-50: color-mix(in srgb, var(--color-accent) 50%, black 50%);
+  --color-accent-shade-40: color-mix(in srgb, var(--color-accent) 40%, black 60%);
+  --color-accent-shade-30: color-mix(in srgb, var(--color-accent) 30%, black 70%);
+  --color-accent-shade-20: color-mix(in srgb, var(--color-accent) 20%, black 80%);
+  --color-accent-shade-11: color-mix(in srgb, var(--color-accent) 11%, black 89%);
+  --color-accent-shade-10: color-mix(in srgb, var(--color-accent) 10%, black 90%);
+  --color-accent-shade-05: color-mix(in srgb, var(--color-accent) 5%, black 95%);
+  --color-accent-shade-02: color-mix(in srgb, var(--color-accent) 2%, black 98%);
+
+  --color-success-shade-98: color-mix(in srgb, var(--color-success) 98%, black 2%);
+  --color-success-shade-90: color-mix(in srgb, var(--color-success) 90%, black 10%);
+  --color-success-shade-80: color-mix(in srgb, var(--color-success) 80%, black 20%);
+  --color-success-shade-73: color-mix(in srgb, var(--color-success) 73%, black 27%);
+  --color-success-shade-70: color-mix(in srgb, var(--color-success) 70%, black 30%);
+  --color-success-shade-60: color-mix(in srgb, var(--color-success) 60%, black 40%);
+  --color-success-shade-50: color-mix(in srgb, var(--color-success) 50%, black 50%);
+  --color-success-shade-40: color-mix(in srgb, var(--color-success) 40%, black 60%);
+  --color-success-shade-30: color-mix(in srgb, var(--color-success) 30%, black 70%);
+  --color-success-shade-20: color-mix(in srgb, var(--color-success) 20%, black 80%);
+  --color-success-shade-11: color-mix(in srgb, var(--color-success) 11%, black 89%);
+  --color-success-shade-10: color-mix(in srgb, var(--color-success) 10%, black 90%);
+  --color-success-shade-05: color-mix(in srgb, var(--color-success) 5%, black 95%);
+  --color-success-shade-02: color-mix(in srgb, var(--color-success) 2%, black 98%);
+
+  --color-fail-shade-98: color-mix(in srgb, var(--color-fail) 98%, black 2%);
+  --color-fail-shade-90: color-mix(in srgb, var(--color-fail) 90%, black 10%);
+  --color-fail-shade-80: color-mix(in srgb, var(--color-fail) 80%, black 20%);
+  --color-fail-shade-73: color-mix(in srgb, var(--color-fail) 73%, black 27%);
+  --color-fail-shade-70: color-mix(in srgb, var(--color-fail) 70%, black 30%);
+  --color-fail-shade-60: color-mix(in srgb, var(--color-fail) 60%, black 40%);
+  --color-fail-shade-50: color-mix(in srgb, var(--color-fail) 50%, black 50%);
+  --color-fail-shade-40: color-mix(in srgb, var(--color-fail) 40%, black 60%);
+  --color-fail-shade-30: color-mix(in srgb, var(--color-fail) 30%, black 70%);
+  --color-fail-shade-20: color-mix(in srgb, var(--color-fail) 20%, black 80%);
+  --color-fail-shade-11: color-mix(in srgb, var(--color-fail) 11%, black 89%);
+  --color-fail-shade-10: color-mix(in srgb, var(--color-fail) 10%, black 90%);
+  --color-fail-shade-05: color-mix(in srgb, var(--color-fail) 5%, black 95%);
+  --color-fail-shade-02: color-mix(in srgb, var(--color-fail) 2%, black 98%);
+
+  --color-info-shade-98: color-mix(in srgb, var(--color-info) 98%, black 2%);
+  --color-info-shade-90: color-mix(in srgb, var(--color-info) 90%, black 10%);
+  --color-info-shade-80: color-mix(in srgb, var(--color-info) 80%, black 20%);
+  --color-info-shade-73: color-mix(in srgb, var(--color-info) 73%, black 27%);
+  --color-info-shade-70: color-mix(in srgb, var(--color-info) 70%, black 30%);
+  --color-info-shade-60: color-mix(in srgb, var(--color-info) 60%, black 40%);
+  --color-info-shade-50: color-mix(in srgb, var(--color-info) 50%, black 50%);
+  --color-info-shade-40: color-mix(in srgb, var(--color-info) 40%, black 60%);
+  --color-info-shade-30: color-mix(in srgb, var(--color-info) 30%, black 70%);
+  --color-info-shade-20: color-mix(in srgb, var(--color-info) 20%, black 80%);
+  --color-info-shade-11: color-mix(in srgb, var(--color-info) 11%, black 89%);
+  --color-info-shade-10: color-mix(in srgb, var(--color-info) 10%, black 90%);
+  --color-info-shade-05: color-mix(in srgb, var(--color-info) 5%, black 95%);
+  --color-info-shade-02: color-mix(in srgb, var(--color-info) 2%, black 98%);
+
+  --color-warning-shade-98: color-mix(in srgb, var(--color-warning) 98%, black 2%);
+  --color-warning-shade-90: color-mix(in srgb, var(--color-warning) 90%, black 10%);
+  --color-warning-shade-80: color-mix(in srgb, var(--color-warning) 80%, black 20%);
+  --color-warning-shade-73: color-mix(in srgb, var(--color-warning) 73%, black 27%);
+  --color-warning-shade-70: color-mix(in srgb, var(--color-warning) 70%, black 30%);
+  --color-warning-shade-60: color-mix(in srgb, var(--color-warning) 60%, black 40%);
+  --color-warning-shade-50: color-mix(in srgb, var(--color-warning) 50%, black 50%);
+  --color-warning-shade-40: color-mix(in srgb, var(--color-warning) 40%, black 60%);
+  --color-warning-shade-30: color-mix(in srgb, var(--color-warning) 30%, black 70%);
+  --color-warning-shade-20: color-mix(in srgb, var(--color-warning) 20%, black 80%);
+  --color-warning-shade-11: color-mix(in srgb, var(--color-warning) 11%, black 89%);
+  --color-warning-shade-10: color-mix(in srgb, var(--color-warning) 10%, black 90%);
+  --color-warning-shade-05: color-mix(in srgb, var(--color-warning) 5%, black 95%);
+  --color-warning-shade-02: color-mix(in srgb, var(--color-warning) 2%, black 98%);
+}
+
+/* Color Variables - Alpha */
+:root {
+  --color-base-alpha-05: hsla(var(--hsl-base), 0.05);
+  --color-base-alpha-10: hsla(var(--hsl-base), 0.1);
+  --color-base-alpha-11: hsla(var(--hsl-base), 0.11);
+  --color-base-alpha-15: hsla(var(--hsl-base), 0.15);
+  --color-base-alpha-20: hsla(var(--hsl-base), 0.2);
+  --color-base-alpha-25: hsla(var(--hsl-base), 0.25);
+  --color-base-alpha-30: hsla(var(--hsl-base), 0.3);
+  --color-base-alpha-35: hsla(var(--hsl-base), 0.35);
+  --color-base-alpha-40: hsla(var(--hsl-base), 0.4);
+  --color-base-alpha-45: hsla(var(--hsl-base), 0.45);
+  --color-base-alpha-50: hsla(var(--hsl-base), 0.5);
+  --color-base-alpha-55: hsla(var(--hsl-base), 0.55);
+  --color-base-alpha-60: hsla(var(--hsl-base), 0.6);
+  --color-base-alpha-65: hsla(var(--hsl-base), 0.65);
+  --color-base-alpha-70: hsla(var(--hsl-base), 0.7);
+  --color-base-alpha-73: hsla(var(--hsl-base), 0.73);
+  --color-base-alpha-75: hsla(var(--hsl-base), 0.75);
+  --color-base-alpha-80: hsla(var(--hsl-base), 0.8);
+  --color-base-alpha-85: hsla(var(--hsl-base), 0.85);
+  --color-base-alpha-90: hsla(var(--hsl-base), 0.9);
+  --color-base-alpha-95: hsla(var(--hsl-base), 0.95);
+
+  --color-primary-alpha-05: hsla(var(--hsl-primary), 0.05);
+  --color-primary-alpha-10: hsla(var(--hsl-primary), 0.1);
+  --color-primary-alpha-11: hsla(var(--hsl-primary), 0.11);
+  --color-primary-alpha-15: hsla(var(--hsl-primary), 0.15);
+  --color-primary-alpha-20: hsla(var(--hsl-primary), 0.2);
+  --color-primary-alpha-25: hsla(var(--hsl-primary), 0.25);
+  --color-primary-alpha-30: hsla(var(--hsl-primary), 0.3);
+  --color-primary-alpha-35: hsla(var(--hsl-primary), 0.35);
+  --color-primary-alpha-40: hsla(var(--hsl-primary), 0.4);
+  --color-primary-alpha-45: hsla(var(--hsl-primary), 0.45);
+  --color-primary-alpha-50: hsla(var(--hsl-primary), 0.5);
+  --color-primary-alpha-55: hsla(var(--hsl-primary), 0.55);
+  --color-primary-alpha-60: hsla(var(--hsl-primary), 0.6);
+  --color-primary-alpha-65: hsla(var(--hsl-primary), 0.65);
+  --color-primary-alpha-70: hsla(var(--hsl-primary), 0.7);
+  --color-primary-alpha-73: hsla(var(--hsl-primary), 0.73);
+  --color-primary-alpha-75: hsla(var(--hsl-primary), 0.75);
+  --color-primary-alpha-80: hsla(var(--hsl-primary), 0.8);
+  --color-primary-alpha-85: hsla(var(--hsl-primary), 0.85);
+  --color-primary-alpha-90: hsla(var(--hsl-primary), 0.9);
+  --color-primary-alpha-95: hsla(var(--hsl-primary), 0.95);
+
+  --color-secondary-alpha-05: hsla(var(--hsl-secondary), 0.05);
+  --color-secondary-alpha-10: hsla(var(--hsl-secondary), 0.1);
+  --color-secondary-alpha-11: hsla(var(--hsl-secondary), 0.11);
+  --color-secondary-alpha-15: hsla(var(--hsl-secondary), 0.15);
+  --color-secondary-alpha-20: hsla(var(--hsl-secondary), 0.2);
+  --color-secondary-alpha-25: hsla(var(--hsl-secondary), 0.25);
+  --color-secondary-alpha-30: hsla(var(--hsl-secondary), 0.3);
+  --color-secondary-alpha-35: hsla(var(--hsl-secondary), 0.35);
+  --color-secondary-alpha-40: hsla(var(--hsl-secondary), 0.4);
+  --color-secondary-alpha-45: hsla(var(--hsl-secondary), 0.45);
+  --color-secondary-alpha-50: hsla(var(--hsl-secondary), 0.5);
+  --color-secondary-alpha-55: hsla(var(--hsl-secondary), 0.55);
+  --color-secondary-alpha-60: hsla(var(--hsl-secondary), 0.6);
+  --color-secondary-alpha-65: hsla(var(--hsl-secondary), 0.65);
+  --color-secondary-alpha-70: hsla(var(--hsl-secondary), 0.7);
+  --color-secondary-alpha-73: hsla(var(--hsl-secondary), 0.73);
+  --color-secondary-alpha-75: hsla(var(--hsl-secondary), 0.75);
+  --color-secondary-alpha-80: hsla(var(--hsl-secondary), 0.8);
+  --color-secondary-alpha-85: hsla(var(--hsl-secondary), 0.85);
+  --color-secondary-alpha-90: hsla(var(--hsl-secondary), 0.9);
+  --color-secondary-alpha-95: hsla(var(--hsl-secondary), 0.9);
+
+  --color-accent-alpha-05: hsla(var(--hsl-accent), 0.05);
+  --color-accent-alpha-10: hsla(var(--hsl-accent), 0.1);
+  --color-accent-alpha-11: hsla(var(--hsl-accent), 0.11);
+  --color-accent-alpha-15: hsla(var(--hsl-accent), 0.15);
+  --color-accent-alpha-20: hsla(var(--hsl-accent), 0.2);
+  --color-accent-alpha-25: hsla(var(--hsl-accent), 0.25);
+  --color-accent-alpha-30: hsla(var(--hsl-accent), 0.3);
+  --color-accent-alpha-35: hsla(var(--hsl-accent), 0.35);
+  --color-accent-alpha-40: hsla(var(--hsl-accent), 0.4);
+  --color-accent-alpha-45: hsla(var(--hsl-accent), 0.45);
+  --color-accent-alpha-50: hsla(var(--hsl-accent), 0.5);
+  --color-accent-alpha-55: hsla(var(--hsl-accent), 0.55);
+  --color-accent-alpha-60: hsla(var(--hsl-accent), 0.6);
+  --color-accent-alpha-65: hsla(var(--hsl-accent), 0.65);
+  --color-accent-alpha-70: hsla(var(--hsl-accent), 0.7);
+  --color-accent-alpha-73: hsla(var(--hsl-accent), 0.73);
+  --color-accent-alpha-75: hsla(var(--hsl-accent), 0.75);
+  --color-accent-alpha-80: hsla(var(--hsl-accent), 0.8);
+  --color-accent-alpha-85: hsla(var(--hsl-accent), 0.85);
+  --color-accent-alpha-90: hsla(var(--hsl-accent), 0.9);
+  --color-accent-alpha-95: hsla(var(--accent-hsl), 0.95);
+}
+
+/* Named tint/shade aliases (Material-style) */
+:root {
+  /* primary */
+  --primary-color-light: var(--color-primary-tint-73);
+  --primary-color-super-light: var(--color-primary-tint-11);
+  --primary-color-dark: var(--color-primary-shade-40);
+  --primary-color-super-dark: var(--color-primary-shade-70);
+
+  /* secondary */
+  --secondary-color-light: var(--color-secondary-tint-73);
+  --secondary-color-super-light: var(--color-secondary-tint-11);
+  --secondary-color-dark: var(--color-secondary-shade-40);
+  --secondary-color-super-dark: var(--color-secondary-shade-70);
+
+  /* accent */
+  --accent-color-light: var(--color-accent-tint-73);
+  --accent-color-super-light: var(--color-accent-tint-11);
+  --accent-color-dark: var(--color-accent-shade-40);
+  --accent-color-super-dark: var(--color-accent-shade-70);
+
+  /* success/info/warning/fail */
+  --success-color-light: var(--color-success-tint-73);
+  --success-color-super-light: var(--color-success-tint-11);
+  --success-color-dark: var(--color-success-shade-40);
+  --success-color-super-dark: var(--color-success-shade-70);
+
+  --info-color-light: var(--color-info-tint-73);
+  --info-color-super-light: var(--color-info-tint-11);
+  --info-color-dark: var(--color-info-shade-40);
+  --info-color-super-dark: var(--color-info-shade-70);
+
+  --warning-color-light: var(--color-warning-tint-73);
+  --warning-color-super-light: var(--color-warning-tint-11);
+  --warning-color-dark: var(--color-warning-shade-40);
+  --warning-color-super-dark: var(--color-warning-shade-70);
+
+  --fail-color-light: var(--color-fail-tint-73);
+  --fail-color-super-light: var(--color-fail-tint-11);
+  --fail-color-dark: var(--color-fail-shade-40);
+  --fail-color-super-dark: var(--color-fail-shade-70);
+}

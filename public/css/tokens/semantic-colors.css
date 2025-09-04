@@ -1,0 +1,14 @@
+/* Semantic Color Tokens */
+
+:root {
+  --color-dark: var(--color-base);
+  --color-light: var(--color-base-02);
+
+  --color-text: var(--color-base);
+  --color-link: var(--color-primary);
+
+  --color-success: var(--color-blue);
+  --color-fail: var(--color-red);
+  --color-warning: var(--color-yellow);
+  --color-info: var(--color-navy);
+}

@@ -1,0 +1,18 @@
+/* Color Values */
+:root {
+  --hsl-base: 220, 13%, 18%;
+  --hsl-primary: 214, 84%, 56%;
+  --hsl-secondary: 45, 100%, 51%;
+  --hsl-tertiary: 342, 75%, 51%;
+  --hsl-accent: 159, 64%, 52%;
+}
+
+/* Solid Colors */
+:root {
+  --color-base: hsl(var(--hsl-base));
+  --color-primary: hsl(var(--hsl-primary));
+  --color-secondary: hsl(var(--hsl-secondary));
+  --color-tertiary: hsl(var(--hsl-tertiary));
+  --color-accent: hsl(var(--hsl-accent));
+}
+
