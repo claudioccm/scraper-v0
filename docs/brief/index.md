@@ -1,0 +1,26 @@
+# Project Brief: White Label Design System
+
+## Table of Contents
+
+- [Project Brief: White Label Design System](#table-of-contents)
+  - [Executive Summary](./executive-summary.md)
+  - [Problem Statement](./problem-statement.md)
+  - [Proposed Solution](./proposed-solution.md)
+  - [Target Users](./target-users.md)
+    - [Primary User Segment: Development Agencies](./target-users.md#primary-user-segment-development-agencies)
+    - [Secondary User Segment: In-House Development Teams](./target-users.md#secondary-user-segment-in-house-development-teams)
+  - [Goals & Success Metrics](./goals-success-metrics.md)
+    - [Business Objectives](./goals-success-metrics.md#business-objectives)
+    - [User Success Metrics (LLM Context)](./goals-success-metrics.md#user-success-metrics-llm-context)
+    - [Key Performance Indicators (KPIs)](./goals-success-metrics.md#key-performance-indicators-kpis)
+    - [LLM Documentation Requirements](./goals-success-metrics.md#llm-documentation-requirements)
+  - [MVP Scope](./mvp-scope.md)
+    - [Core Features (Must Have)](./mvp-scope.md#core-features-must-have)
+    - [Component Scope for MVP (Complete Atomic Design Hierarchy)](./mvp-scope.md#component-scope-for-mvp-complete-atomic-design-hierarchy)
+    - [Out of Scope for MVP](./mvp-scope.md#out-of-scope-for-mvp)
+    - [MVP Success Criteria](./mvp-scope.md#mvp-success-criteria)
+  - [Post-MVP Vision](./post-mvp-vision.md)
+    - [Phase 2 Features (Post-MVP)](./post-mvp-vision.md#phase-2-features-post-mvp)
+    - [Long-term Vision (1-2 Years)](./post-mvp-vision.md#long-term-vision-1-2-years)
+    - [Expansion Opportunities](./post-mvp-vision.md#expansion-opportunities)
+    - [Strategic Advantages of This Approach](./post-mvp-vision.md#strategic-advantages-of-this-approach)

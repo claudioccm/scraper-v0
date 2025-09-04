@@ -45,10 +45,13 @@ Development teams and agencies face a recurring dilemma: every new client or bra
 
 The White Label Design System transforms your existing Nuxt3/Vue3 + Nuxt Content repository into a dual-pillar architecture:
 
-**Pillar 1: Content Engine Foundation**
-- Nuxt Content handles all content workflows (markdown → web)
-- Pre-built content types, routing, and management interfaces
-- Optimized for performance with SSG/SSR flexibility
+**Pillar 1: Content Engine Foundation (Project Boilerplate Core)**
+- **Boilerplate Repository:** Complete starter template for new white-label projects
+- **Nuxt Content Integration:** File-based CMS with markdown → web workflows
+- **Pre-built Content Architecture:** Standard content types, routing patterns, and page templates
+- **Theme-Aware Content:** Content rendering adapts to active brand theme automatically
+- **Project Scaffolding:** One-command setup for new branded sites with content structure
+- **Performance Optimized:** SSG/SSR flexibility with build-time theme selection
 
 **Pillar 2: Themeable Design System**
 - Component library with complete visual abstraction
@@ -63,14 +66,23 @@ The White Label Design System transforms your existing Nuxt3/Vue3 + Nuxt Content
 - CSS layers methodology (`@layer reset, defaults, components, utils, overrides`) ✅
 - Nuxt Content integration with structured markdown ✅
 
-*White Label Implementation:*
+*Boilerplate Repository Structure:*
 ```
+├── content/                    # Nuxt Content markdown files
+│   ├── index.md               # Homepage content
+│   ├── about.md               # Standard pages
+│   ├── blog/                  # Blog posts
+│   └── projects/              # Portfolio/case studies
 ├── themes/
 │   ├── [brand-name]/
-│   │   ├── tokens.css          # Brand-specific design tokens
-│   │   ├── assets/             # Brand assets (logos, fonts)
-│   │   └── config.js           # Theme configuration
-│   └── default/                # Fallback theme
+│   │   ├── tokens.css         # Brand-specific design tokens
+│   │   ├── assets/            # Brand assets (logos, fonts)
+│   │   ├── content-overrides/ # Brand-specific content variants
+│   │   └── config.js          # Theme + content configuration
+│   └── default/               # Fallback theme + sample content
+├── scripts/
+│   ├── new-project.js         # Project scaffolding script
+│   └── theme-setup.js         # Theme initialization
 ```
 
 **Key Differentiators:**
@@ -85,11 +97,18 @@ The White Label Design System transforms your existing Nuxt3/Vue3 + Nuxt Content
 - Build-time theme optimization with tree-shaking
 - Runtime theme selection through Nuxt configuration
 
+**Boilerplate Project Workflow:**
+1. **Clone Repository:** `git clone white-label-design-system my-new-project`
+2. **Edit Design Tokens:** Manually update CSS custom properties with brand colors/fonts
+3. **Replace Content:** Update markdown files with client-specific copy
+4. **Deploy:** `npm run build` creates optimized branded site
+
 **Why This Will Succeed:**
-- Leverages battle-tested architecture already optimized for theming
-- CSS layers + custom properties approach is exactly what white labeling requires
-- Content engine is production-ready for multi-brand deployment
-- Separation of concerns (content logic vs. visual theming) reduces complexity
+- **Proven Foundation:** Leverages battle-tested architecture already optimized for theming
+- **Content-First Approach:** Unlike pure design systems, includes complete content management
+- **Instant Project Setup:** From clone to branded site in under 30 minutes
+- **Separation of Concerns:** Content logic vs. visual theming reduces complexity
+- **Git-Based Workflow:** Familiar development process with version control
 
 **High-Level Vision:** An LLM-optimized white label design system where AI agents can rapidly generate and customize branded websites through structured prompts and design token manipulation, similar to how Shadcn enables AI-driven component generation but with complete brand theming capabilities.
 
@@ -200,45 +219,82 @@ The White Label Design System transforms your existing Nuxt3/Vue3 + Nuxt Content
 
 ### Core Features (Must Have)
 
-- **LLM-Ready Component Library:** Complete ccm-* component set with standardized documentation format
-  - All existing components (ccmCard, ccmButton, etc.) with LLM-optimized docs
-  - Machine-readable schemas (JSON/YAML) for each component
-  - Consistent prop APIs across all components
+- **Complete Component Library:** Full atomic design hierarchy (30 components)
+  - All atoms, molecules, and organisms from technical specification
+  - Standardized ccm-* naming convention
+  - LLM-optimized documentation format
+  - Consistent prop APIs and variant systems
 
-- **Design Token System:** Full theming infrastructure for AI-driven customization
-  - Brand schema definition (colors, typography, spacing, effects)
-  - CSS custom property architecture with semantic naming
-  - Theme validation and error handling for AI-generated configs
+- **Design Token System (PRIORITY):** Complete theming infrastructure foundation
+  - Utopia.fyi integration for spaces and sizes
+  - CSS custom property hierarchy (base → theme → component levels)
+  - HSL-based color system with tints/shades (10% increments + 3%, 5%, 7%)
+  - System color aliases (success=green, error=red, warning=yellow, info=blue)
+  - Token validation and semantic naming structure
 
 - **AI Documentation Framework:** Documentation optimized for LLM consumption
   - Structured markdown with AI guidance sections
   - Prompt templates for common scenarios
   - Code examples with context explanations
 
-- **Content Engine Integration:** Nuxt Content system ready for multi-brand deployment
-  - Theme-aware routing and rendering
-  - Brand-specific content organization
-  - Dynamic theme switching capability
+- **Content Engine Integration:** Complete boilerplate foundation for new projects
+  - **Project Scaffolding System:** One-command setup creates new themed project
+  - **Content Template Library:** Pre-built page templates (homepage, about, blog, portfolio)
+  - **Theme-Content Coordination:** Content rendering automatically adapts to active theme
+  - **Brand-Specific Content:** Support for brand-customized copy and messaging
+  - **Content Management Workflow:** Git-based content updates with theme-aware previews
+  - **Multi-Brand Deployment:** Single codebase supports multiple branded instances
+  - **Related Content System (Epic):** Composable functions for tag/category-based content relationships
+    - Content filtering and browsing by categories/tags
+    - Related posts functionality across all content types
+    - Tag archive pages and content discovery features
+    - Reusable composables for any content relationship needs
 
 - **Developer Experience Tools:** Essential tooling for both humans and AI
   - Component registry/index for discovery
-  - Theme configuration validation
-  - Basic CLI for theme management
+  - Clear documentation for manual token editing
 
-### Component Priority for MVP (9 Core Components)
+### Component Scope for MVP (Complete Atomic Design Hierarchy)
 
-**Tier 1 - Foundation (6 components):**
-1. **ccmButton** ✅ - Universal, high branding impact
-2. **ccmCard** ✅ - Content layouts, showcases design system  
-3. **ccmSection** ✅ - Layout building block
-4. **ccmNavigation** ✅ - Critical first impression, branding
-5. **ccmHero** ✅ - Landing pages, typography showcase
-6. **ccmFooter** ✅ - Site completion, brand consistency
+**Atoms (6 components):**
+- **ccmButton** - Primary action trigger
+- **ccmIcon** - Visual symbols and recognition
+- **ccmChip** - Status, tags, counts
+- **ccmToggleButton** - On/off state control
+- **ccmInputText** - Single-line text entry
+- **ccmInputRadio** - Mutually exclusive options
+- **ccmInputCheckbox** - Multi-select boolean
+- **ccmSelect** - Dropdown option selection
+- **ccmTextarea** - Multi-line text entry
+- **ccmLabel** - Form control association
 
-**Tier 2 - Essential UI (3 components):**
-7. **ccmText** - Typography system, high branding value
-8. **ccmForm** - User interaction, complex theming showcase
-9. **ccmGrid** - Layout foundation, universal usage
+**Molecules (8 components):**
+- **ccmSearchBar** - Composed search interface
+- **ccmAlert** - Dismissible notifications
+- **ccmFormField** - Label, control, helper text bundle
+- **ccmDropdownMenu** - Action list disclosure
+- **ccmPagination** - Content page navigation
+- **ccmTabNavigation** - Section switching tabs
+- **ccmTooltip** - Contextual help overlay
+- **ccmMenuButton** - ARIA menu disclosure
+
+**Organisms (16 components):**
+- **ccmTopbar** - Global navigation header
+- **ccmFooter** - Site links and metadata
+- **ccmHero** - Prominent intro section
+- **ccmPostHero** - Article header with meta
+- **ccmSection** - Content wrapper and spacing
+- **ccmCard** - Reusable content preview
+- **ccmCallout** - Highlighted content block
+- **ccmProseSection** - Rich text content area
+- **ccmProseHgroup** - Heading groups
+- **ccmDataTable** - Accessible data tables
+- **ccmSidebar** - Vertical navigation/content
+- **ccmModal** - Overlay focused tasks
+- **ccmTabbedInterface** - Tabs with panels
+- **ccmContentSlider** - Horizontal carousel
+- **ccmCollapsibleSection** - Expand/collapse regions
+- **ccmMenu** - ARIA menu with commands
 
 *Detailed component specifications will be maintained in `docs/components-spec.md`*
 
@@ -246,15 +302,19 @@ The White Label Design System transforms your existing Nuxt3/Vue3 + Nuxt Content
 - Advanced theme editor UI (web interface)
 - Multiple deployment targets (focus on Nuxt/Vercel initially)
 - Complex animation systems
-- Advanced accessibility testing automation
 - Multi-language/i18n support
 - Enterprise SSO integration
 - Advanced analytics/tracking systems
+- **MCP Integration** (moved to Phase 2)
+- **LLM Testing Framework** (moved to Phase 2)
+- **Machine-readable schemas** (moved to Phase 2)
 
 ### MVP Success Criteria
-- **LLM Test:** AI can generate a complete branded website from prompts in under 30 minutes
-- **Component Coverage:** 9 production-ready components with full LLM-optimized documentation
-- **Theme Completeness:** AI can customize 100% of visual aspects without touching component code
+- **Component Coverage:** 30 production-ready components following atomic design hierarchy
+- **Token System Foundation:** Complete design token architecture (Utopia + CSS custom properties)
+- **Boilerplate Functionality:** Clone-to-deployed workflow works in under 30 minutes
+- **Content Template Library:** Complete set of page templates (homepage, about, blog, portfolio)
+- **Manual Theming:** Design token editing creates working branded site
 - **Documentation Quality:** Human developers can implement without additional support
 - **Performance Baseline:** Generated sites achieve 90+ Lighthouse scores
 
@@ -262,6 +322,10 @@ The White Label Design System transforms your existing Nuxt3/Vue3 + Nuxt Content
 
 ### Phase 2 Features (Post-MVP)
 - **MCP Integration:** Model Context Protocol integration enabling LLMs to directly interact with the design system, generate components, and manage themes through standardized protocols
+- **LLM Testing Framework:** Automated testing to ensure AI-generated code meets accessibility and quality standards
+- **Machine-Readable Schemas:** JSON/YAML component definitions for advanced AI integration
+- **Advanced AI Integration:** AI can generate complete branded websites from prompts
+- **Full Theme Automation:** AI can customize 100% of visual aspects without touching component code
 - **Web Components Architecture:** Framework-agnostic Web Components version allowing usage across React, Vue, Angular, Svelte, and vanilla JavaScript
 - **Multi-Framework Tooling:** Build system that generates framework-specific wrappers and adapters from core Web Components
 - **AI Agent Ecosystem:** MCP servers that enable AI agents to browse, generate, and deploy white-label sites autonomously

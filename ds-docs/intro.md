@@ -1,3 +1,21 @@
+# Tokens
+- Spaces and Sizes will follow [utopia.fyi](https://utopia.fyi/) system
+- Colors will follow 
+
+# Base
+- reset.css is done. It follows https://cube.fyi/ global.css
+- fonts.css is a simple configuration file for external font import. 
+- typography.css is done. Simple file that defines most of the baseline typoegraphic styels. We can revise/expand later.
+- everylayout.css is done. It defines most of the https://every-layout.dev/ helper classes. 
+
+## Utils
+- utilities are done. We can revise/expand later.
+
+# Components
+Component Organization and Composability will follow https://atomicdesign.bradfrost.com/chapter-1/
+
+
+
 # Token Hierarchy
 --base-level-variable: VALUE
 --theme-level-variable: VALUE
