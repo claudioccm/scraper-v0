@@ -40,8 +40,8 @@
 .text-transform\:capitalize { text-transform: capitalize; }
 .text-transform\:none { text-transform: none; }
 
-.float/:left { float: left; }
-.float/:right { float: right; }
+.float\/:left { float: left; }
+.float\/:right { float: right; }
 
 .aux {
   outline: 2px solid red;
