@@ -1,11 +1,15 @@
 <template>
-  <div class="ccm-card">
+  <nuxt-link class="ccm-card" :to="to">
     <slot />
-  </div>
+  </nuxt-link>
 </template>
 
 <script setup>
 const props = defineProps({
+  to: {
+    type: String,
+    required: true
+  },
   title: {
     type: String,
     required: true
@@ -15,7 +19,8 @@ const props = defineProps({
 
 <style scoped>
 .ccm-card {
+  display: block;
   padding: var(--space-s);
-  border: 2px solid red;
+  border: 2px solid var(--color-primary-tint-20);
 }
 </style>

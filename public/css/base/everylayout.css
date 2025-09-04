@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  --_stack-space: var(--theme-stack-space, 1.5rem);
 }
 
 .stack > * {
@@ -25,6 +27,7 @@
 }
 
 .center {
+  --_center-measure: var(--theme-center-measure, 1100px);
   box-sizing: content-box;
   margin-inline: auto;
   padding-inline: var(--_center-padding, 1rem);

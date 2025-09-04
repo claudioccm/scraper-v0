@@ -1,0 +1,4 @@
+:root {
+  --theme-center-measure: 1100px;
+  --theme-stack-space: var(--space-s);
+}

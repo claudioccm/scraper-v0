@@ -25,7 +25,7 @@ const props = defineProps({
 <style scoped>
 .ccm-footer {
   --_ccm-footer-padding-block: var(--space-l);
-  --_ccm-footer-background-color: transparent;
+  --_ccm-footer-background-color: var(--color-primary-tint-20);
 }
 
 .ccm-footer {
@@ -40,27 +40,5 @@ const props = defineProps({
 .ccm-footer[size="xl"]  { --_ccm-footer-padding-block: var(--space-xl);  }
 .ccm-footer[size="2xl"] { --_ccm-footer-padding-block: var(--space-2xl); }
 .ccm-footer[size="3xl"] { --_ccm-footer-padding-block: var(--space-3xl); }
-
-.ccm-footer[background-color="base-color"]                  { --_ccm-footer-background-color: var(--base-color); }
-.ccm-footer[background-color="base-color-light"]            { --_ccm-footer-background-color: var(--base-color-light); }
-.ccm-footer[background-color="base-color-super-light"]      { --_ccm-footer-background-color: var(--base-color-super-light); }
-
-.ccm-footer[background-color="primary-color"]               { --_ccm-footer-background-color: var(--primary-color); }
-.ccm-footer[background-color="primary-color-light"]         { --_ccm-footer-background-color: var(--primary-color-light); }
-.ccm-footer[background-color="primary-color-super-light"]   { --_ccm-footer-background-color: var(--primary-color-super-light); }
-
-.ccm-footer[background-color="secondary-color"]             { --_ccm-footer-background-color: var(--secondary-color); }
-.ccm-footer[background-color="secondary-color-light"]       { --_ccm-footer-background-color: var(--secondary-color-light); }
-.ccm-footer[background-color="secondary-color-super-light"] { --_ccm-footer-background-color: var(--secondary-color-super-light); }
-
-.ccm-footer[background-color="accent-color"]                { --_ccm-footer-background-color: var(--accent-color); }
-.ccm-footer[background-color="accent-color-light"]          { --_ccm-footer-background-color: var(--accent-color-light); }
-.ccm-footer[background-color="accent-color-super-light"]    { --_ccm-footer-background-color: var(--accent-color-super-light); }
-
-.ccm-footer[background-color="white-color"]                 { --_ccm-footer-background-color: var(--white-color); }
-
-.ccm-footer[background-color="black-color"]                 { --_ccm-footer-background-color: var(--black-color); }
-.ccm-footer[background-color="black-color-light"]           { --_ccm-footer-background-color: var(--black-color-light); }
-.ccm-footer[background-color="black-color-super-light"]     { --_ccm-footer-background-color: var(--black-color-super-light); }
 
 </style>

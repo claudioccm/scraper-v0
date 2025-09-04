@@ -1,21 +1,7 @@
 <template>
   <ccm-section full-width>
   <div class="blog-post | prose-layout | prose">
-    <slot name="hero">
-      <ccm-post-hero 
-        class="post-hero"
-        :title="post.title" 
-        :brow="post.meta.brow" 
-        :date="post.meta.date" 
-        :author="post.meta.author" 
-        :tags="post.meta.tags" 
-        :tagline="post.meta.tagline"
-        />
-      <!-- <pre>{{ post }}</pre> -->
-    </slot>
-
     <ContentRenderer v-if="post" :value="post" class="post-main-content | prose" />
-    
     <div v-else>
       <h1>Post not found</h1>
         <NuxtLink to="/blog">← Back to Blog</NuxtLink>
@@ -43,6 +29,28 @@ useHead({
   ]
 })
 
+// Provide hero data from content front-matter (if present) to layout via shared state
+const heroState = useState('hero', () => null)
+if (post.value?.hero) {
+  heroState.value = {
+    brow: post.value.hero.brow || 'Service',
+    title: post.value.hero.title || post.value.title,
+    tagline: post.value.hero.tagline || post.value.description,
+    backgroundColor: post.value.hero.backgroundColor || 'transparent',
+    size: post.value.hero.size || 'l',
+    hideTopbar: post.value.hero.hideTopbar === true
+  }
+} else {
+  // Default hero from content basics
+  heroState.value = {
+    brow: 'Blog',
+    title: post.value.title,
+    tagline: post.value.description,
+    backgroundColor: 'transparent',
+    size: 'l',
+    hideTopbar: false
+  }
+}
 
 </script>
 

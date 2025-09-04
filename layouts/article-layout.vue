@@ -1,7 +1,17 @@
 <template>
   <div class="layout">
     <slot name="hero">
-
+      <ccm-hero
+        v-if="hero"
+        class="layout-hero"
+        
+        :brow="hero.brow"
+        :title="hero.title"
+        :tagline="hero.tagline"
+        :background-color="hero.backgroundColor || 'base-color'"
+        :size="hero.size || 'l'"
+        :hide-topbar="hero.hideTopbar === true"
+      />
     </slot>
     <main class="layout-main">
       <slot />
@@ -11,6 +21,9 @@
 </template>
 
 <script setup>
+const route = useRoute()
+const heroState = useState('hero', () => null)
+const hero = computed(() => route.meta.hero || heroState.value)
 </script>
 
 <style>

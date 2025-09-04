@@ -19,6 +19,10 @@
 @import 'tokens/semantic-spacing.css' layer(tokens);
 @import 'tokens/semantic-misc.css' layer(tokens);
 
+@import 'themes/default/misc.css' layer(themes);
+@import 'themes/default/colors.css' layer(themes);
+@import 'themes/default/typography.css' layer(themes);
+
 
 @import "components/prose.css" layer(components);
 

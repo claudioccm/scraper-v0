@@ -1,9 +1,7 @@
 <template>
-  <header class="ccm-hero" :background-color="backgroundColor" :size="size" :hide-topbar="hideTopbar">
+  <header class="ccm-hero" :background-color="backgroundColor" :size="size" :hide-topbar="hideTopbar" >
     <div class="ccm-hero-container | center">
-      
       <ccm-topbar v-if="!hideTopbar" />
-      
       <slot>
         <hgroup>
           <span v-if="brow">{{ brow }}</span>
@@ -47,7 +45,7 @@ const props = defineProps({
 <style scoped>
 .ccm-hero {
   --_ccm-hero-padding-block: var(--space-l);
-  --_ccm-hero-background-color: transparent;
+  --_ccm-hero-background-color: var(--color-primary-tint-20);
 }
 
 .ccm-hero {
@@ -62,34 +60,4 @@ const props = defineProps({
 .ccm-hero[size="xl"]  { --_ccm-hero-padding-block: var(--space-xl);  }
 .ccm-hero[size="2xl"] { --_ccm-hero-padding-block: var(--space-2xl); }
 .ccm-hero[size="3xl"] { --_ccm-hero-padding-block: var(--space-3xl); }
-
-.ccm-hero[background-color="base-color"]                  { --_ccm-hero-background-color: var(--base-color); }
-.ccm-hero[background-color="base-color-light"]            { --_ccm-hero-background-color: var(--base-color-light); }
-.ccm-hero[background-color="base-color-super-light"]      { --_ccm-hero-background-color: var(--base-color-super-light); }
-
-.ccm-hero[background-color="primary-color"]               { --_ccm-hero-background-color: var(--primary-color); }
-.ccm-hero[background-color="primary-color-light"]         { --_ccm-hero-background-color: var(--primary-color-light); }
-.ccm-hero[background-color="primary-color-super-light"]   { --_ccm-hero-background-color: var(--primary-color-super-light); }
-
-.ccm-hero[background-color="secondary-color"]             { --_ccm-hero-background-color: var(--secondary-color); }
-.ccm-hero[background-color="secondary-color-light"]       { --_ccm-hero-background-color: var(--secondary-color-light); }
-.ccm-hero[background-color="secondary-color-super-light"] { --_ccm-hero-background-color: var(--secondary-color-super-light); }
-
-.ccm-hero[background-color="accent-color"]                { --_ccm-hero-background-color: var(--accent-color); }
-.ccm-hero[background-color="accent-color-light"]          { --_ccm-hero-background-color: var(--accent-color-light); }
-.ccm-hero[background-color="accent-color-super-light"]    { --_ccm-hero-background-color: var(--accent-color-super-light); }
-
-.ccm-hero[background-color="white-color"]                 { --_ccm-hero-background-color: var(--white-color); }
-
-.ccm-hero[background-color="black-color"]                 { --_ccm-hero-background-color: var(--black-color); }
-.ccm-hero[background-color="black-color-light"]           { --_ccm-hero-background-color: var(--black-color-light); }
-.ccm-hero[background-color="black-color-super-light"]     { --_ccm-hero-background-color: var(--black-color-super-light); }
-
-.ccm-hero[background-color="success-color"]               { --_ccm-hero-background-color: var(--success-color); }
-.ccm-hero[background-color="success-color-light"]         { --_ccm-hero-background-color: var(--success-color-light); }
-.ccm-hero[background-color="success-color-super-light"]   { --_ccm-hero-background-color: var(--success-color-super-light); }
-
-.ccm-hero[background-color="fail-color"]                  { --_ccm-hero-background-color: var(--fail-color); }
-.ccm-hero[background-color="fail-color-light"]            { --_ccm-hero-background-color: var(--fail-color-light); }
-.ccm-hero[background-color="fail-color-super-light"]      { --_ccm-hero-background-color: var(--fail-color-super-light); }
 </style>
