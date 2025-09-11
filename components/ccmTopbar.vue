@@ -1,13 +1,15 @@
 <template>
   <div class="topbar | cluster">
-    <h1><nuxt-link to="/">ccm.design</nuxt-link></h1>
+    <h1 class="topbar__title | h3">
+      <slot name="logo"><nuxt-link to="/">ccm.design</nuxt-link></slot>
+    </h1>
     <nav class="margin-left:auto">
-      <ul class="cluster">
-        <li><nuxt-link to="/services">What we do</nuxt-link></li>
-        <li><nuxt-link to="/about">About</nuxt-link></li>
-        <li><nuxt-link to="/case-studies">Case Studies</nuxt-link></li>
-        <li><nuxt-link to="/blog">Insights</nuxt-link></li>
-        <li><nuxt-link to="/contact">Contact</nuxt-link></li>
+      <ul class="menu | cluster">
+        <li><nuxt-link class="menu__item" to="/services">What we do</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/about">About</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/case-studies">Case Studies</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/blog">Insights</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/contact">Contact</nuxt-link></li>
       </ul>
     </nav>
   </div>
@@ -18,5 +20,18 @@
 </script>
 
 <style scoped>
+.topbar__title {
+  padding-block: var(--space-xs);
+  * { text-decoration: none; }
+}
 
+.menu__item {
+  color: var(--color-base);
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+li:not(:first-child) .menu__item { padding-inline-start: var(--space-xs); 
+}
 </style>

@@ -1,7 +1,18 @@
 <template>
-  <header class="ccm-hero" :background-color="backgroundColor" :size="size" :hide-topbar="hideTopbar" >
-    <div class="ccm-hero-container | center">
-      <ccm-topbar v-if="!hideTopbar" />
+  <header 
+    class="ccm-hero" 
+    :background-color="backgroundColor" 
+    :size="size" 
+    :hide-top="hideTop" 
+    :hide-bottom="hideBottom" 
+    :variant="variant"
+    :style="{
+      '--_ccm-hero-background-color': `var(--${backgroundColor})`
+    }"
+    >
+    <ccm-topbar v-if="!hideTopbar" class="ccm-hero__top | center"/>
+    
+    <div class="ccm-hero__main | center">
       <slot>
         <hgroup>
           <span v-if="brow">{{ brow }}</span>
@@ -9,6 +20,9 @@
           <p v-if="tagline">{{ tagline }}</p>
         </hgroup>  
       </slot>
+    </div>
+    <div class="ccm-hero__bottom | center">
+      <slot name="footer" />
     </div>
   </header>
 </template>
@@ -35,9 +49,17 @@ const props = defineProps({
     type: String,
     default: 'l'
   },
-  hideTopbar: {
+  hideTop: {
     type: Boolean,
     default: false
+  },
+  hideBottom: {
+    type: Boolean,
+    default: true
+  },
+  variant: {
+    type: String,
+    default: 'default'
   }
 })
 </script>
@@ -49,15 +71,32 @@ const props = defineProps({
 }
 
 .ccm-hero {
-  padding-block: var(--_ccm-hero-padding-block);
   background-color: var(--_ccm-hero-background-color);
+  aspect-ratio: 16/7;
+  display: flex;
+  flex-direction: column;
+
+  * { width: 100%; }
 }
 
-.ccm-hero[size="xs"]  { --_ccm-hero-padding-block: var(--space-xs);  }
-.ccm-hero[size="s"]   { --_ccm-hero-padding-block: var(--space-s);   }
-.ccm-hero[size="m"]   { --_ccm-hero-padding-block: var(--space-m);   }
-.ccm-hero[size="l"]   { --_ccm-hero-padding-block: var(--space-l);   }
-.ccm-hero[size="xl"]  { --_ccm-hero-padding-block: var(--space-xl);  }
-.ccm-hero[size="2xl"] { --_ccm-hero-padding-block: var(--space-2xl); }
-.ccm-hero[size="3xl"] { --_ccm-hero-padding-block: var(--space-3xl); }
+.ccm-hero__main {
+  display: flex;
+  padding-block: var(--_ccm-hero-padding-block);
+  align-items: center;
+  flex: 1;
+}
+
+.ccm-hero__main {
+  text-wrap: balance;
+}
+
+.ccm-hero__bottom {
+  padding-bottom: var(--_ccm-hero-padding-block);
+}
+
+.ccm-hero[hide-top="true"] .ccm-hero__top { display: none; }
+.ccm-hero[hide-bottom="true"] .ccm-hero__bottom { display: none; }
+
+.ccm-hero[variant="minimal"] { aspect-ratio: unset; }
+
 </style>
