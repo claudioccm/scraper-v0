@@ -25,9 +25,7 @@ definePageMeta({
   }
 })
 
-
-
-
+const blogPosts = content('blog', 'recency')
 </script>
 
 <style scoped>

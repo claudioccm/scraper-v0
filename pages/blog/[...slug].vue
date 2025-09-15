@@ -17,9 +17,8 @@ definePageMeta({
 
 
 const route = useRoute()
-const { data: post } = await useAsyncData(`blog-${route.params.slug}`, () => {
-  return queryCollection('blog').path(`/blog/${route.params.slug}`).first()
-})
+const slug = Array.isArray(route.params.slug) ? route.params.slug.join('/') : route.params.slug
+const post = contentOne('blog', { slug })
 
 // Set page title
 useHead({

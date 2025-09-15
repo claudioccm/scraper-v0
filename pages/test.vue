@@ -26,6 +26,19 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'default'
+})
+
+definePageMeta({
+  hero: {
+    brow: 'Test',
+    title: 'Test',
+    tagline: 'Test',
+    backgroundColor: 'base-color-super-light',
+  }
+})
+
 
 </script>
 

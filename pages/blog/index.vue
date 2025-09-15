@@ -15,15 +15,17 @@
       </field-group>
     </div>
   </ccm-section>
+
   <ccm-section>
-    <div class="grid" data-gap="s" data-min-width="l">
-      <ccm-card v-for="post in blogPosts" :key="post._path" size="s">
-        <h4>{{ post.meta.brow }}</h4>
-        <h3>{{ post.title || post._path }}</h3>
-        <p>{{ post.meta.tagline }}</p>
-      </ccm-card>
+    <div class="stack">
+      <ccm-card v-for="post in blogPosts" :key="post._path">
+          <h4>{{ post.meta.brow }}</h4>
+          <h3>{{ post.title || post._path }}</h3>
+          <p>{{ post.meta.tagline }}</p>
+        </ccm-card>
     </div>
   </ccm-section>
+  
   <ccm-section>
     <h2>Subscribe to Our Insights</h2>
     <p>Get the latest analysis and design thinking from our team, delivered straight to your inbox. We share practical advice for organizations looking to increase their impact.</p> 
@@ -31,7 +33,6 @@
       <input type="email" label="Email" placeholder="Email" />
       <input type="submit" label="Subscribe" />
     </field-group>
-
   </ccm-section>
 </template>
 
@@ -49,6 +50,7 @@ definePageMeta({
 const { data: blogPosts } = await useAsyncData('blog-posts', () => {
   return queryCollection('blog').all()
 })
+const selectedFilter = ref('')
 </script>
 
 <style scoped>
