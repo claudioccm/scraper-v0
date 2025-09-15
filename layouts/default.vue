@@ -6,7 +6,7 @@
       :brow="hero.brow"
       :title="hero.title"
       :tagline="hero.tagline"
-      :background-color="hero.backgroundColor || 'transparent'"
+      :background-color="hero.backgroundColor"
       :size="hero.size || 'l'"
       :hide-topbar="hero.hideTopbar === true"
     />

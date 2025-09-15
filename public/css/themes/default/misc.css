@@ -1,4 +1,5 @@
 :root {
   --theme-center-measure: 1100px;
   --theme-stack-space: var(--space-s);
+  --theme-card-border-radius: var(--border-radius-l);
 }

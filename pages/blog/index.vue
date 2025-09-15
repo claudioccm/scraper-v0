@@ -17,7 +17,7 @@
   </ccm-section>
 
   <ccm-section>
-    <div class="stack">
+    <div class="grid" data-gap="s" data-min-width="l">
       <ccm-card v-for="post in blogPosts" :key="post._path">
           <h4>{{ post.meta.brow }}</h4>
           <h3>{{ post.title || post._path }}</h3>
@@ -56,29 +56,3 @@ const selectedFilter = ref('')
 <style scoped>
 
 </style>
-
-<!-- 
----
-title: Insights
-slug: /insights
-status: done
----
-
-# 
-
-
-
----
-## Content Pillars
-
-
-
----
-
-
-
----
-
-
-
- -->

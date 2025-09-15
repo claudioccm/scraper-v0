@@ -34,8 +34,7 @@ definePageMeta({
   hero: {
     brow: 'Test',
     title: 'Test',
-    tagline: 'Test',
-    backgroundColor: 'base-color-super-light',
+    tagline: 'Test'
   }
 })
 

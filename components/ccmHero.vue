@@ -10,7 +10,12 @@
       '--_ccm-hero-background-color': `var(--${backgroundColor})`
     }"
     >
-    <ccm-topbar v-if="!hideTopbar" class="ccm-hero__top | center"/>
+    
+    <div class="ccm-hero__top" v-if="!hideTop">
+      <slot name="top">
+        <ccm-topbar class="ccm-hero__top | center"/>
+      </slot>
+    </div>
     
     <div class="ccm-hero__main | center">
       <slot>
@@ -21,9 +26,11 @@
         </hgroup>  
       </slot>
     </div>
+    
     <div class="ccm-hero__bottom | center">
       <slot name="footer" />
     </div>
+
   </header>
 </template>
 
@@ -43,7 +50,7 @@ const props = defineProps({
   },
   backgroundColor: {
     type: String,
-    default: 'transparent'
+    default: ''
   },
   size: {
     type: String,

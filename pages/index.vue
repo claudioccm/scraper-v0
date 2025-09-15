@@ -1,27 +1,29 @@
 <template>
   <ccm-section>
-    <h2>Latest Blog Posts</h2>
-    <div v-if="blogPosts && blogPosts.length > 0" class="stack">
-      <ccm-card v-for="post in blogPosts.slice(0, 3)" :key="post.path" :to="post.path">
-        <h4>{{ post.meta.brow }}</h4>
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.meta.tagline }}</p>
-      </ccm-card>
-      <NuxtLink to="/blog">View all blog posts →</NuxtLink>
+    <div class="stack">
+      <h2>Latest Blog Posts</h2>
+      <div v-if="blogPosts && blogPosts.length > 0" class="grid" data-gap="s" data-min-width="l">
+        <ccm-card v-for="post in blogPosts.slice(0, 3)" :key="post.path" :to="post.path">
+          <h4>{{ post.meta.brow }}</h4>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.meta.tagline }}</p>
+        </ccm-card>
+        <ccm-button to="/blog">View all blog posts →</ccm-button>
+      </div>
+      <p v-else>No blog posts found</p>
     </div>
-    <p v-else>No blog posts found</p>
+
   </ccm-section>
 </template>
 
 <script setup>
 definePageMeta({
   hero: {
-    brow: '',
-    title: 'We build systems',
-    tagline: 'Strategy, design, and engineering.',
-    backgroundColor: 'base-color-super-light',
+    brow: 'Hero Brow',
+    title: 'Hero Title',
+    tagline: 'Hero Tagline',
+    backgroundColor: 'color-primary-tint-20',
     size: 'l',
-    hideTopbar: false
   }
 })
 

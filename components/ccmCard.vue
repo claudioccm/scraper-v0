@@ -81,6 +81,9 @@ const wrapperAttrs = computed(() => {
   --_card-border-radius: var(--border-radius-l);
   --_card-gap: var(--space-m);
   --_card-background-color: var(--color-primary-tint-20);
+  --_card-color: var(--color-primary-tint-80);
+  --_card-border-width: 2px;
+  --_card-border-style: solid;
 }
 
 
@@ -88,43 +91,26 @@ const wrapperAttrs = computed(() => {
   display: flex;
   flex-direction: column;
   border: var(--_card-border-width) var(--_card-border-style) var(--_card-color);
-  border-radius: var(--_card-border-radius);
+  overflow: hidden;
   gap: var(--_card-gap);
   text-decoration: none;
   color: var(--_card-color);
+
+  border-radius: var(--_card-border-radius);
 }
 
 .ccm-card__text {
   flex: 1;
-  padding-block: var(--_card-padding);
+  padding: 0 var(--_card-padding) var(--_card-padding);
 }
 
 .ccm-card__image {
-  flex: 1;
   padding: var(--_card-padding);
   background-color: var(--_card-background-color);
   width: 100%;
   aspect-ratio: 16/9;
-  border-radius: var(--_card-border-radius);
-}
-
-
-
-@media (min-width: 768px) {
-  .ccm-card { flex-direction: row; }
-
-  .ccm-card__text { padding-inline: var(--_card-padding); }
-
-  .ccm-card__image {
-    width: 100%;
-    aspect-ratio: 1/1; 
-  }
-
-  .ccm-card:nth-child(even) { 
-    flex-direction: row-reverse; 
-    .ccm-card__text { text-align: right; }
-  }
   
 }
+
 
 </style>

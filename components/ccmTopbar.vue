@@ -1,7 +1,7 @@
 <template>
   <div class="topbar | cluster">
     <h1 class="topbar__title | h3">
-      <slot name="logo"><nuxt-link to="/">ccm.design</nuxt-link></slot>
+      <slot name="logo"><nuxt-link to="/">site name</nuxt-link></slot>
     </h1>
     <nav class="margin-left:auto">
       <ul class="menu | cluster">
