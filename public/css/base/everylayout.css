@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
 
-  --_stack-space: var(--theme-stack-space, 1.5rem);
+  --_stack-space: var(--theme-stack-space, var(--space-s));
 }
 
 .stack > * {
@@ -11,13 +11,13 @@
 }
 
 .stack > * + * {
-  margin-block-start: var(--_stack-space, 1.5rem);
+  margin-block-start: var(--_stack-space);
 }
 
 .cluster {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--_cluster-space, 1rem);
+  gap: var(--_cluster-space, var(--space-s));
   justify-content: flex-start;
   align-items: center;
 
@@ -28,16 +28,17 @@
 
 .center {
   --_center-measure: var(--theme-center-measure, 1100px);
+  --_center-padding: var(--theme-center-padding, var(--space-s));
   box-sizing: content-box;
   margin-inline: auto;
-  padding-inline: var(--_center-padding, 1rem);
+  padding-inline: var(--_center-padding);
   max-inline-size: var(--_center-measure);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--_grid-gap, var(--base-gutter));
+  grid-template-columns: repeat(auto-fill, minmax(var(--_grid-min-width, 240px), 1fr));
+  gap: var(--_grid-gap, var(--space-s));
 }
 
 .reel {
@@ -73,9 +74,79 @@
 }
 
 .reel > * + * {
-  margin-inline-start: 1rem;
+  margin-inline-start: var(--_reel-space);
 }
 
 .reel.overflowing {
   padding-block-end: 1rem;
 }
+
+/* ========================================
+   Data Attribute Controls for Spacing
+   ======================================== */
+
+/* Stack spacing */
+.stack[data-space="3xs"] { --_stack-space: var(--space-3xs); }
+.stack[data-space="2xs"] { --_stack-space: var(--space-2xs); }
+.stack[data-space="xs"] { --_stack-space: var(--space-xs); }
+.stack[data-space="s"] { --_stack-space: var(--space-s); }
+.stack[data-space="m"] { --_stack-space: var(--space-m); }
+.stack[data-space="l"] { --_stack-space: var(--space-l); }
+.stack[data-space="xl"] { --_stack-space: var(--space-xl); }
+.stack[data-space="2xl"] { --_stack-space: var(--space-2xl); }
+.stack[data-space="3xl"] { --_stack-space: var(--space-3xl); }
+
+/* Cluster spacing */
+.cluster[data-space="3xs"] { --_cluster-space: var(--space-3xs); }
+.cluster[data-space="2xs"] { --_cluster-space: var(--space-2xs); }
+.cluster[data-space="xs"] { --_cluster-space: var(--space-xs); }
+.cluster[data-space="s"] { --_cluster-space: var(--space-s); }
+.cluster[data-space="m"] { --_cluster-space: var(--space-m); }
+.cluster[data-space="l"] { --_cluster-space: var(--space-l); }
+.cluster[data-space="xl"] { --_cluster-space: var(--space-xl); }
+.cluster[data-space="2xl"] { --_cluster-space: var(--space-2xl); }
+.cluster[data-space="3xl"] { --_cluster-space: var(--space-3xl); }
+
+/* Center measure (width) */
+.center[data-measure="narrow"] { --_center-measure: 60ch; }
+.center[data-measure="normal"] { --_center-measure: 75ch; }
+.center[data-measure="wide"] { --_center-measure: 90ch; }
+.center[data-measure="full"] { --_center-measure: 100%; }
+
+/* Grid gap */
+.grid[data-gap="3xs"] { --_grid-gap: var(--space-3xs); }
+.grid[data-gap="2xs"] { --_grid-gap: var(--space-2xs); }
+.grid[data-gap="xs"] { --_grid-gap: var(--space-xs); }
+.grid[data-gap="s"] { --_grid-gap: var(--space-s); }
+.grid[data-gap="m"] { --_grid-gap: var(--space-m); }
+.grid[data-gap="l"] { --_grid-gap: var(--space-l); }
+.grid[data-gap="xl"] { --_grid-gap: var(--space-xl); }
+.grid[data-gap="2xl"] { --_grid-gap: var(--space-2xl); }
+.grid[data-gap="3xl"] { --_grid-gap: var(--space-3xl); }
+
+/* Grid min-width */
+.grid[data-min-width="xs"] { --_grid-min-width: 160px; }
+.grid[data-min-width="s"] { --_grid-min-width: 200px; }
+.grid[data-min-width="m"] { --_grid-min-width: 240px; }
+.grid[data-min-width="l"] { --_grid-min-width: 300px; }
+.grid[data-min-width="xl"] { --_grid-min-width: 400px; }
+.grid[data-min-width="2xl"] { --_grid-min-width: 500px; }
+
+/* Reel spacing (for the gap between items) */
+.reel {
+  --_reel-space: var(--space-s);
+}
+
+.reel > * + * {
+  margin-inline-start: var(--_reel-space);
+}
+
+.reel[data-space="3xs"] { --_reel-space: var(--space-3xs); }
+.reel[data-space="2xs"] { --_reel-space: var(--space-2xs); }
+.reel[data-space="xs"] { --_reel-space: var(--space-xs); }
+.reel[data-space="s"] { --_reel-space: var(--space-s); }
+.reel[data-space="m"] { --_reel-space: var(--space-m); }
+.reel[data-space="l"] { --_reel-space: var(--space-l); }
+.reel[data-space="xl"] { --_reel-space: var(--space-xl); }
+.reel[data-space="2xl"] { --_reel-space: var(--space-2xl); }
+.reel[data-space="3xl"] { --_reel-space: var(--space-3xl); }
