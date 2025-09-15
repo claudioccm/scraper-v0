@@ -7,6 +7,11 @@
 
 ## Overview
 
+### Documentation index
+
+- `docs/components/ccm-card.md` — ccmCard.vue implementation and API
+- `docs/components/everylayout.md` — Stack, Cluster, Center, Grid, Reel utilities
+
 This document provides comprehensive specifications for all components in the White Label Design System. Each component is designed for optimal LLM consumption and generation while maintaining human readability and development efficiency.
 
 ## Component Architecture Principles
