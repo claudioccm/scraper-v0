@@ -24,6 +24,27 @@ export default defineContentConfig({
         // Adding a basic schema for services as well
         status: z.string().optional()
       })
+    }),
+    uilibrary: defineCollection({
+      type: 'page',
+      source: 'ui-library/**/*.md',
+      schema: z.object({
+        published: z.boolean().default(true),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        hero: z
+          .object({
+            brow: z.string().optional(),
+            title: z.string().optional(),
+            tagline: z.string().optional(),
+            backgroundColor: z.string().optional(),
+            size: z.string().optional(),
+            hideTopbar: z.boolean().optional()
+          })
+          .optional(),
+        order: z.number().optional(),
+        tags: z.array(z.string()).optional()
+      })
     })
   }
 })
