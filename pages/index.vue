@@ -7,6 +7,7 @@
           <h4>{{ post.meta.brow }}</h4>
           <h3>{{ post.title }}</h3>
           <p>{{ post.meta.tagline }}</p>
+          <ccm-button :to="post.path">Read post</ccm-button>
         </ccm-card>
         <ccm-button to="/blog">View all blog posts →</ccm-button>
       </div>
