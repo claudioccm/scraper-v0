@@ -19,12 +19,17 @@
   <div class="ccm-card__text">
     <slot />
   </div>
+
+  <span class="ccm-card__action" aria-hidden="true" :id="ctaId">
+    <slot name="action">{{ action }}</slot>
+  </span>
     
   </nuxt-link>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { useSlugify } from '~/composables/useSlugify'
 
 const props = defineProps({
   to: {
@@ -51,15 +56,7 @@ const props = defineProps({
 
 const isLink = computed(() => Boolean(props.to))
 
-function slugify(text) {
-  return String(text || '')
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-')
-    .replace(/^-+/, '')
-    .replace(/-+$/, '')
-}
+const { slugify } = useSlugify()
 
 const baseForId = computed(() => props.title || props.to || 'card')
 const ctaId = computed(() => `desc-${slugify(baseForId.value)}`)
@@ -95,8 +92,11 @@ const wrapperAttrs = computed(() => {
   gap: var(--_card-gap);
   text-decoration: none;
   color: var(--_card-color);
-
   border-radius: var(--_card-border-radius);
+}
+
+.ccm-card * {
+  cursor: pointer;
 }
 
 .ccm-card__text {
@@ -109,8 +109,9 @@ const wrapperAttrs = computed(() => {
   background-color: var(--_card-background-color);
   width: 100%;
   aspect-ratio: 16/9;
-  
 }
 
-
+.ccm-card__action {
+  padding: var(--_card-padding);
+}
 </style>

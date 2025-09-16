@@ -1,125 +1,109 @@
 <template>
   <component
-    class="button"
     :is="componentTag"
-    v-bind="linkProps"
-    :variant="visual"
+    class="button"
+    :style="cssVars"
+    :to="to"
+    :href="href"
+    :disabled="disabled"
+    :aria-label="computedAriaLabel"
+    :aria-pressed="computedAriaPressed"
+    :aria-expanded="computedAriaExpanded"
+    v-bind="$attrs"
+    :variant="variant"
     :color="color"
     :size="size"
-    :icon-before="iconBefore"
-    :icon-after="iconAfter"
-    :label="label"
-    :value="value"
-    :disabled="disabled"
+    :backgroundColor="backgroundColor"
   >
-    <slot>{{label}}</slot>
+    <slot>{{ label }}</slot>
   </component>
 </template>
 
 <script setup>
-  import { toRefs, defineProps, computed, resolveComponent } from 'vue';
-  
-  const props = defineProps({
-    is: {
-      type: String,
-      default: 'button'
-    },
-    to: {
-      type: [String, Object],
-      default: null
-    },
-    href: {
-      type: String,
-      default: null
-    },
-    target: {
-      type: String,
-      default: null
-    },
-    rel: {
-      type: String,
-      default: null
-    },
-    external: {
-      type: Boolean,
-      default: undefined
-    },
-    replace: {
-      type: Boolean,
-      default: false
-    },
-    label: {
-      type: String,
-      default: 'label'
-    },
-    value: {
-      type: String,
-      default: 'value'
-    },
-    size: {
-      type: String,
-      default: 'm'
-    },
-    color: {
-      type: String,
-      default: 'base'
-    },
-    iconBefore: {
-      type: String,
-      default: null
-    },
-    iconAfter: {
-      type: String,
-      default: null
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-  });
+import { computed, resolveComponent } from 'vue'
 
-  const { value, label, size, color, iconBefore, iconAfter } = toRefs(props)
+const props = defineProps({
+  // Structural props
+  is: { type: String, default: 'button' },
+  to: { type: [String, Object], default: null },
+  href: { type: String, default: null },
 
-  const NuxtLink = resolveComponent('NuxtLink')
+  // Visual props
+  label: { type: String, default: 'Button' },
+  size: { type: String, default: 'm' },
+  color: { type: String, default: 'base' },
+  backgroundColor: { type: String, default: 'transparent' },
+  variant: { type: String, default: 'primary' },
 
-  const isAbsolute = (url) => typeof url === 'string' && /^(https?:)?\/\//.test(url)
+  // Accessibility props
+  ariaLabel: { type: String, default: null },
+  isPressed: { type: Boolean, default: null },
+  isExpanded: { type: Boolean, default: null },
+  disabled: { type: Boolean, default: false }
+})
 
-  const componentTag = computed(() => {
-    if (props.to) return NuxtLink
-    if (props.href) return 'a'
-    return props.is || 'button'
-  })
+const componentTag = computed(() => {
+  if (props.to) return resolveComponent('NuxtLink')
+  if (props.href) return 'a'
+  return props.is
+})
 
-  const linkProps = computed(() => {
-    if (props.to) {
-      const external = props.external ?? (typeof props.to === 'string' && isAbsolute(props.to))
-      return {
-        to: props.to,
-        external,
-        replace: props.replace,
-        target: props.target || (external ? '_blank' : null),
-        rel: props.rel || (external ? 'noopener noreferrer' : null)
-      }
+const cssVars = computed(() => ({
+  // '--_button-padding-block': `var(--space-${props.size})`,
+  // '--_button-padding-inline': `var(--space-${props.size})`,
+  // '--_button-color': `var(--color-${props.color})`,
+  // '--_button-background-color': `var(--${props.backgroundColor})`
+}))
+
+// Resolve the final URL (href or to)
+const router = useRouter()
+const resolvedHref = computed(() => {
+  if (props.href) return props.href
+  if (props.to) {
+    if (typeof props.to === 'string') return props.to
+    try {
+      return router.resolve(props.to).href
+    } catch {
+      return null
     }
-    if (props.href) {
-      return {
-        href: props.href,
-        target: props.target,
-        rel: props.rel
-      }
-    }
-    return { type: 'button' }
-  })
+  }
+  return null
+})
 
+function humanizeUrl(url) {
+  try {
+    const u = new URL(url, 'http://example.local')
+    const path = u.pathname || ''
+    const last = path.split('/').filter(Boolean).pop() || u.hostname || ''
+    const text = decodeURIComponent((last || '').replace(/[-_]+/g, ' ').trim())
+    if (!text) return 'link'
+    return text.charAt(0).toUpperCase() + text.slice(1)
+  } catch {
+    const fallback = decodeURIComponent((url || '').replace(/[-_]+/g, ' ').trim())
+    return fallback ? fallback.charAt(0).toUpperCase() + fallback.slice(1) : 'link'
+  }
+}
+
+// Accessibility fallbacks
+const computedAriaLabel = computed(() => {
+  if (props.ariaLabel) return props.ariaLabel
+  if (props.label) return props.label
+  const url = resolvedHref.value
+  return url ? `Go to ${humanizeUrl(url)}` : null
+})
+
+const computedAriaPressed = computed(() => {
+  // Only set when explicitly provided; otherwise omit attribute
+  return props.isPressed === null ? null : props.isPressed
+})
+
+const computedAriaExpanded = computed(() => {
+  // Only set when explicitly provided; otherwise omit attribute
+  return props.isExpanded === null ? null : props.isExpanded
+})
 </script>
 
 <style>
-/* 
-  This file contains the structural rules for the button system. 
-  Any visual configuration should be made on the button-visuals.css file.
-  It is very unlikely that anyone will need to edits file for customization purposes. 
-*/
-
 .button {
   /* Structure */
   display: inline-block;
@@ -132,101 +116,136 @@
   -webkit-user-drag: none;
   user-select: none;
   box-sizing: border-box;
-  font-size: 100%;
   text-decoration: none;
   align-self: self-start;
   justify-self: flex-start;
-  
-  font-family: var(--_button-font-family, sans-serif); /* Fallback to sans-serif */
-  font-weight: var(--_button-font-weight);
-  letter-spacing: var(--_button-letter-spacing);
+  border: 2px solid transparent;
+  cursor: pointer;
 }
 
-/* 
-  This file contains the css rules for the button system. 
-  Most of the visual configurations can be made through the variables. (Lines 13-21)
-  Many of these configurations have fallbacks values. 
-*/
-
-.button {
-  /* Required Values */
-  --_button-text-color:        hsla(var(--_button-text-hsl), 1);
-  --_button-padding-block:     var(--space-2xs);
-  --_button-padding-inline:    var(--space-s);
-
-  --_button-color: var(--color-base);
-  
-  /* Optional Values */
-  --_button-border-radius: var(--border-radius-s, 0);    /* Fallback to 0 */
-  --_button-border-color:  var(--_button-color);             /* Fallback to 1px */
-  --_button-border-width:  var(--base-border-width, 2px);   /* Fallback to 1px */
-  --_button-border-style:  var(--base-border-style, solid); /* Fallback to solid */
-  --_button-font-weight:   var(--font-weight, 400);         /* Fallback to 400 */
-  --_button-font-size:     100%;
-  --_button-icon-color:    var(--_button-text-color);
+.button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
-.button[data-color="base"],
-.button[color="base"] { 
-  --_button-color: var(--color-base);
-}
-
-.button[data-color="primary"],
-.button[color="primary"] { 
-  --_button-color: var(--color-primary);
-
-}
-
-.button[data-size="s"],
-.button[size="s"] {
-  --_button-padding-block: var(--s-2);
-  --_button-padding-inline: var(--s0);
-  --_button-font-size: 75%; 
-}
-
-.button[data-size="l"],
-.button[size="l"] {
-  --_button-padding-block: var(--s0);
-  --_button-padding-inline: var(--s2);
-  --_button-font-size: 120%;
-}
-
-.button[data-size="xl"],
-.button[size="xl"] {
-  --_button-padding-block: var(--s0);
-  --_button-padding-inline: var(--s2);
-  --_button-font-size: 150%;
+.button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .button {
-  color: var(--_button-text-color, var(--_button-color));
+  color: var(--_button-color);
   background-color: var(--_button-background-color);
-  
-  padding: var(--_button-padding-block) var(--_button-padding-inline);
-  
-  border-radius: var(--_button-border-radius, 0);
-  border-width: var(--_button-border-width, 1px);
-  border-style: var(--_button-border-style, solid);
-  border-color: var(--_button-border-color);
-  
-  font-family: var(--_button-font-family);
-  font-weight: var(--_button-font-weight, 400);
+  padding-block: var(--_button-padding-block);
+  padding-inline: var(--_button-padding-inline);
+  border-radius: var(--border-radius-m, 8px);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
   font-size: var(--_button-font-size, 100%);
+
+  transition: all 0.2s ease-in-out;
 }
 
+.button:hover {
+  background-color: color-mix(in srgb, var(--_button-color) 90%, black 10%);
+  color: var(--_button-color);
+  border-color: transparent;
+  transform: scale(1.05);
+}
 
-.button[data-variant="primary"],
-.button[variant="primary"] {
-  color: white;
-  border-width: var(--_button-border-width, 0);
-  border-style: var(--_button-border-style, solid);
-  border-color: hsla(var(--_button-hsl), 1);
+/* Button size */
+.button[size='s'] {
+  --_button-font-size: var(--size--1);
+  --_button-padding-block: calc(var(--space-3xs) - 1px) calc(var(--space-3xs) + 1px);
+  --_button-padding-inline: var(--space-2xs);
+}
+
+.button[size='m'],
+.button {
+  --_button-font-size: var(--size-0);
+  --_button-padding-block: calc(var(--space-xs) - 1px) calc(var(--space-xs) + 1px);
+  --_button-padding-inline: var(--space-s);
+}
+
+.button[size='l'] {
+  --_button-font-size: var(--size-1);
+  --_button-padding-block: calc(var(--space-s) - 2px) calc(var(--space-s) + 2px);
+  --_button-padding-inline: var(--space-m);
+}
+
+.button[size='xl'] {
+  --_button-font-size: var(--size-2);
+  --_button-padding-block: calc(var(--space-m) - 3px) calc(var(--space-m) + 3px);
+  --_button-padding-inline: var(--space-l);
+}
+
+/* Variants */
+.button[variant='primary'] {
   --_button-background-color: var(--_button-color);
+  color: var(--color-white);
+  border-color: transparent;
+}
+
+.button[data-variant='secondary'],
+.button[variant='secondary'] {
+  background-color: transparent;
+  color: var(--_button-color);
+  border-color: currentColor;
+}
+
+.button[variant='ghost'],
+.button[variant='link'] {
+  background-color: transparent;
+  color: var(--_button-color);
+  border-color: transparent;
+}
+
+.button[variant='ghost']:hover,
+.button[variant='link']:hover {
+  text-decoration: underline;
+}
+
+/* .button[variant='ghost']:hover,
+.button[variant='link']:hover {
+  background-color: color-mix(in srgb, var(--_button-color) 10%, transparent);
+  color: var(--_button-color);
+  border-color: transparent;
+} */
+
+.button[variant='unstyled'] { all: unset; }
+
+.button[color='primary'] {
+  --_button-color: var(--color-primary);
+}
+.button[color='secondary'] {
+  --_button-color: var(--color-secondary);
+}
+.button[color='base'] {
+  --_button-color: var(--color-base);
+}
+.button[color='accent'] {
+  --_button-color: var(--color-accent);
+}
+.button[color='white'] {
+  --_button-color: var(--color-white);
+}
+.button[color='success'] {
+  --_button-color: var(--color-success);
+}
+.button[color='fail'] {
+  --_button-color: var(--color-fail);
+}
+.button[color='warning'] {
+  --_button-color: var(--color-warning);
+}
+.button[color='info'] {
+  --_button-color: var(--color-info);
 }
 
 
 /* 
-Colors
+Colors (tokens)
 - primary
 - secondary
 - tertiary
@@ -243,7 +262,7 @@ Variants
 - link/ghost
 - unstyled
 
-Sizes
+Sizes (tokens)
 - s
 - m
 - l
@@ -255,6 +274,4 @@ Icon
 
 
 */
-
-
 </style>
