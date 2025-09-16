@@ -28,7 +28,7 @@
     </div>
     
     <div class="ccm-hero__bottom | center">
-      <slot name="footer" />
+      <slot name="bottom" />
     </div>
 
   </header>

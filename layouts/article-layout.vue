@@ -4,14 +4,16 @@
       <ccm-hero
         v-if="hero"
         class="layout-hero"
-        
-        :brow="hero.brow"
-        :title="hero.title"
-        :tagline="hero.tagline"
-        :background-color="hero.backgroundColor || 'base-color'"
-        :size="hero.size || 'l'"
-        :hide-topbar="hero.hideTopbar === true"
-      />
+        :background-color="hero.backgroundColor"
+        :size="hero.size"
+      >
+        <hgroup>
+          <p><ccm-button is="NuxtLink" to="/blog">Back to Blog</ccm-button></p>
+          <span v-if="hero.brow">{{ hero.brow }}</span>
+          <h1>{{ hero.title }}</h1>
+          <p v-if="hero.tagline">{{ hero.tagline }}</p>
+        </hgroup>
+      </ccm-hero>
     </slot>
     <main class="layout-main">
       <slot />

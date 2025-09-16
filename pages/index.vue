@@ -7,9 +7,12 @@
           <h4>{{ post.meta.brow }}</h4>
           <h3>{{ post.title }}</h3>
           <p>{{ post.meta.tagline }}</p>
-          <ccm-button :to="post.path">Read post</ccm-button>
+          
+          <template #action>
+            <ccm-button :to="post.path">Read post</ccm-button>
+          </template>
         </ccm-card>
-        <ccm-button to="/blog">View all blog posts →</ccm-button>
+        <ccm-button to="/blog" variant="primary" color="primary">View all blog posts</ccm-button>
       </div>
       <p v-else>No blog posts found</p>
     </div>
