@@ -9,7 +9,9 @@
           <p>{{ post.meta.tagline }}</p>
           
           <template #action>
-            <ccm-button :to="post.path">Read post</ccm-button>
+            <div class="test">
+              <ccm-button :to="post.path">Read post</ccm-button>
+            </div>
           </template>
         </ccm-card>
         <ccm-button to="/blog" variant="primary" color="primary">View all blog posts</ccm-button>
@@ -35,5 +37,9 @@ const blogPosts = content('blog', 'recency')
 </script>
 
 <style scoped>
-
+.test {
+  display: flex;
+  justify-content: stretch;
+  width: 100%;
+}
 </style>

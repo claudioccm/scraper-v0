@@ -119,7 +119,7 @@ const computedAriaExpanded = computed(() => {
   text-decoration: none;
   align-self: self-start;
   justify-self: flex-start;
-  border: 2px solid transparent;
+  border: var(--_button-border-width) var(--_button-border-style) var(--_button-border-color);
   cursor: pointer;
 }
 
@@ -135,14 +135,27 @@ const computedAriaExpanded = computed(() => {
 }
 
 .button {
+  --_button-border-width: 2px;
+  --_button-border-style: solid;
+  --_button-border-color: transparent;
+  --_button-border-radius: 8px;
+  --_button-font-family: var(--font-family-base);
+  --_button-font-weight: var(--font-weight-bold);
+  --_button-font-size: 100%;
+  --_button-color: var(--_button-color);
+  --_button-background-color: var(--_button-background-color);
+
   color: var(--_button-color);
   background-color: var(--_button-background-color);
   padding-block: var(--_button-padding-block);
   padding-inline: var(--_button-padding-inline);
-  border-radius: var(--border-radius-m, 8px);
-  font-family: var(--font-family-base);
-  font-weight: var(--font-weight-bold);
+  border-radius: var(--_button-border-radius, 8px);
+  font-family: var(--_button-font-family);
+  font-weight: var(--_button-font-weight);
   font-size: var(--_button-font-size, 100%);
+  border-width: var(--_button-border-width);
+  border-style: var(--_button-border-style);
+  border-color: var(--_button-border-color);
 
   transition: all 0.2s ease-in-out;
 }
@@ -184,7 +197,7 @@ const computedAriaExpanded = computed(() => {
 .button[variant='primary'] {
   --_button-background-color: var(--_button-color);
   color: var(--color-white);
-  border-color: transparent;
+  border-color: var(--_button-border-color);
 }
 
 .button[data-variant='secondary'],
