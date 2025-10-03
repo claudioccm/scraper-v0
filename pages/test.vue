@@ -1,110 +1,166 @@
 <template>
   <ccm-section>
     <div class="stack">
-    <h3>Colors</h3>  
-    <div class="cluster">
-      <ccm-button variant="secondary" color="primary">Primary</ccm-button>
-      <ccm-button variant="secondary" color="secondary">Secondary</ccm-button>
-      <ccm-button variant="secondary" color="base">Base</ccm-button>
-      <ccm-button variant="secondary" color="accent">Accent</ccm-button>
-      <ccm-button variant="secondary" color="white">White</ccm-button>
-      <ccm-button variant="secondary" color="success">Success</ccm-button>
-      <ccm-button variant="secondary" color="fail">Fail</ccm-button>
-      <ccm-button variant="secondary" color="warning">Warning</ccm-button>
-      <ccm-button variant="secondary" color="info">Info</ccm-button>
+      <h2>Scraper Test Harness</h2>
+      <form class="scrape-form" @submit.prevent="onSubmit">
+        <label class="field" for="scrape-url">
+          <span class="field__label">URL to scrape</span>
+          <input
+            id="scrape-url"
+            v-model="url"
+            class="field__input"
+            type="url"
+            name="url"
+            placeholder="https://example.com/article"
+            autocomplete="off"
+            required
+          />
+        </label>
+        <p v-if="validationError" class="field__error">{{ validationError }}</p>
+        <div class="actions">
+          <ccm-button
+            is="button"
+            type="submit"
+            variant="primary"
+            color="primary"
+            :disabled="!isUrlValid || isLoading"
+          >
+            {{ isLoading ? 'Scraping…' : 'Scrape URL' }}
+          </ccm-button>
+        </div>
+      </form>
+      <ScrapeResultCard
+        v-if="showCard"
+        heading="Latest run"
+        heading-level="h3"
+        :subheading="result?.normalizedUrl || ''"
+        :request-status="requestStatus"
+        :result="result"
+        :is-busy="isLoading"
+        failure-label="Scrape failed:"
+        :failure-message="scrapeError"
+      />
     </div>
-    <div class="cluster">
-      <ccm-button variant="primary" color="primary">Primary</ccm-button>
-      <ccm-button variant="primary" color="secondary">Secondary</ccm-button>
-      <ccm-button variant="primary" color="base">Base</ccm-button>
-      <ccm-button variant="primary" color="accent">Accent</ccm-button>
-      <ccm-button variant="primary" color="white">White</ccm-button>
-      <ccm-button variant="primary" color="success">Success</ccm-button>
-      <ccm-button variant="primary" color="fail">Fail</ccm-button>
-      <ccm-button variant="primary" color="warning">Warning</ccm-button>
-      <ccm-button variant="primary" color="info">Info</ccm-button>
-    </div>
-  
-    <h4>Sizes</h4>
-      <div class="cluster">
-        <ccm-button variant="secondary" color="secondary" size="s">Small Secondary</ccm-button>
-        <ccm-button variant="secondary" color="secondary" size="m">Medium Secondary</ccm-button>
-        <ccm-button variant="secondary" color="secondary" size="l">Large Secondary</ccm-button>
-        <ccm-button variant="secondary" color="secondary" size="xl">Extra Large Secondary</ccm-button>
-      </div>
-
-      <h3>Primary</h3>
-      <div class="cluster">
-        <ccm-button variant="primary" color="primary" size="s">Small Primary</ccm-button>
-        <ccm-button variant="primary" color="primary" size="m">Medium Primary</ccm-button>
-        <ccm-button variant="primary" color="primary" size="l">Large Primary</ccm-button>
-        <ccm-button variant="primary" color="primary" size="xl">Extra Large Primary</ccm-button>
-      </div>
-
-      <h3>Ghost and Link</h3>
-      <div class="cluster">
-        <ccm-button variant="ghost" color="ghost" size="s">Small Ghost</ccm-button>
-        <ccm-button variant="ghost" color="ghost" size="m">Medium Ghost</ccm-button>
-        <ccm-button variant="ghost" color="ghost" size="l">Large Ghost</ccm-button>
-        <ccm-button variant="ghost" color="ghost" size="xl">Extra Large Ghost</ccm-button>
-      </div>
-
-      <h3>Unstyled</h3>
-      <div class="cluster">
-        <ccm-button variant="unstyled" color="unstyled" size="s">Small Unstyled</ccm-button>
-        <ccm-button variant="unstyled" color="unstyled" size="m">Medium Unstyled</ccm-button>
-        <ccm-button variant="unstyled" color="unstyled" size="l">Large Unstyled</ccm-button>
-        <ccm-button variant="unstyled" color="unstyled" size="xl">Extra Large Unstyled</ccm-button>
-      </div>
-    </div>
-    
-  </ccm-section>
-  <ccm-section>
-    <h2>Default Section</h2>
-    <p>This is the default <code>ccm-section</code> with no props.</p>
-  </ccm-section>
-
-  <ccm-section size="m" background-color="primary">
-    <h2>Primary Color Section</h2>
-    <p>This section uses <code>color="primary"</code> for a primary palette background.</p>
-  </ccm-section>
-
-  <ccm-section size="s" background-color="secondary">
-    <h2>Secondary Color Section</h2>
-    <p>This section uses <code>color="secondary"</code> for a secondary palette background.</p>
-  </ccm-section>
-
-  <ccm-section color="accent" :elevated="true">
-    <h2>Accent Color, Elevated</h2>
-    <p>This section uses <code>color="accent"</code> and <code>:elevated="true"</code> for a raised accent look.</p>
-  </ccm-section>
-
-  <ccm-section color="white" border>
-    <h2>White Section with Border</h2>
-    <p>This section uses <code>color="white"</code> and <code>border</code> for a card-like appearance.</p>
   </ccm-section>
 </template>
 
-<script setup>
-definePageMeta({
-  layout: 'default'
-})
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import type { ScraperRequestStatus } from '~/types/scraper'
 
-definePageMeta({
-  hero: {
-    brow: 'Test',
-    title: 'Test',
-    tagline: 'Test'
+const { scrape } = useScraper()
+
+type ScrapeResponse = Awaited<ReturnType<typeof scrape>>
+
+const url = ref('')
+const result = ref<ScrapeResponse | null>(null)
+const isLoading = ref(false)
+const validationError = ref('')
+const scrapeError = ref('')
+const submitted = ref(false)
+const requestStatus = ref<ScraperRequestStatus>('done')
+
+const isUrlValid = computed(() => {
+  const value = url.value.trim()
+  if (!value) return false
+  try {
+    const parsed = new URL(value)
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:'
+  } catch {
+    return false
   }
 })
 
+const showCard = computed(() => submitted.value && (isLoading.value || Boolean(result.value) || Boolean(scrapeError.value)))
 
+const onSubmit = async () => {
+  validationError.value = ''
+  scrapeError.value = ''
+
+  if (!isUrlValid.value) {
+    validationError.value = 'Enter a valid http(s) URL.'
+    submitted.value = false
+    requestStatus.value = 'done'
+    return
+  }
+
+  submitted.value = true
+  requestStatus.value = 'running'
+  isLoading.value = true
+  result.value = null
+
+  try {
+    const data = await scrape(url.value.trim())
+    result.value = data
+    requestStatus.value = 'done'
+  } catch (err: any) {
+    const data = (err?.data ?? null) as ScrapeResponse | null
+    if (data) {
+      result.value = data
+      requestStatus.value = 'done'
+    } else {
+      requestStatus.value = 'failed'
+    }
+
+    const message = data?.error?.message || err?.statusMessage || err?.message || 'Scrape request failed.'
+    scrapeError.value = message
+  } finally {
+    isLoading.value = false
+  }
+}
+
+definePageMeta({
+  hero: {
+    brow: 'Internal tools',
+    title: 'Scraper test view',
+    tagline: 'Run the scraper module against a specific URL and inspect the output.'
+  }
+})
 </script>
 
 <style scoped>
-.button-grid {
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l, 1.5rem);
+  max-width: 720px;
+}
+
+.scrape-form {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: var(--space-m);
+  gap: var(--space-m, 1rem);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2xs, 0.5rem);
+}
+
+.field__label {
+  font-weight: 600;
+}
+
+.field__input {
+  width: 100%;
+  padding: var(--space-s, 0.75rem);
+  border-radius: var(--border-radius-m, 8px);
+  border: 1px solid var(--color-neutral-60, #ccc);
+  background: var(--color-white, #fff);
+  font-size: 1rem;
+}
+
+.field__input:focus-visible {
+  outline: 2px solid var(--color-primary, #0070f3);
+  outline-offset: 2px;
+}
+
+.field__error {
+  color: var(--color-danger-60, #b00020);
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-s, 0.75rem);
 }
 </style>

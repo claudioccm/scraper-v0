@@ -8,6 +8,7 @@
         <li><nuxt-link class="menu__item" to="/">Home</nuxt-link></li>
         <li><nuxt-link class="menu__item" to="/blog">Insights</nuxt-link></li>
         <li><nuxt-link class="menu__item" to="/test">Test</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/batch-test">Batch Test</nuxt-link></li>
       </ul>
     </nav>
   </div>
