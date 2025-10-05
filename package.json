@@ -9,6 +9,9 @@
     "postinstall": "nuxt prepare",
     "test:pdfs": "node scripts/run-pdf-scrapes.mjs"
   },
+  "imports": {
+    "#internal/nuxt/paths": "./node_modules/nuxt/dist/core/runtime/nitro/utils/paths.js"
+  },
   "dependencies": {
     "@nuxt/content": "^3.5.1",
     "@nuxt/eslint": "^1.3.0",
@@ -20,6 +23,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.5.0",
     "eslint": "^9.25.1",
+    "js-yaml": "^4.1.0",
     "nuxt": "^3.16.2",
     "pdf-parse": "^1.1.1",
     "pinia": "^3.0.2",
@@ -32,6 +36,7 @@
   },
   "devDependencies": {
     "@nuxt/vite-builder": "^3.16.2",
+    "@types/js-yaml": "^4.0.9",
     "@types/vimeo__player": "^2.18.3",
     "postcss": "^8.4.0",
     "postcss-import": "^16.0.0",
