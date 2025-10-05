@@ -5,12 +5,13 @@ import { useRuntimeConfig } from '#imports'
 import { ofetch } from 'ofetch'
 import pdfParse from 'pdf-parse/lib/pdf-parse.js'
 import type { PDFParseResult } from 'pdf-parse/lib/pdf-parse.js'
-import { getConfigForHost, getSummaryConfig } from '../../config'
+import { getConfigForHost, getPdfConfig, getSummaryConfig } from '../../config'
 import type { ScraperFieldConfig } from '../../config.types'
-import { findFreshByUrl, mapDbJoinedToScrapeResult, upsertResult } from '../lib/store'
+import { getScraperPersistence, hasScraperPersistence } from '../lib/persistence'
 import type { ScrapeRequest, ScrapeRequestOptions, ScrapeResult, ScrapeType } from '../../types'
 
 const SUMMARY_CONFIG = getSummaryConfig()
+const PDF_CONFIG = getPdfConfig()
 
 interface TraceEntry {
   step: string
@@ -45,6 +46,7 @@ export default defineEventHandler(async (event) => {
   const targetUrl = body.url.trim()
   const normalizedOriginalUrl = normaliseUrl(targetUrl)
   const trace = createTrace()
+  const persistence = getScraperPersistence()
 
   const options: ScrapeRequestOptions = body.options ?? {}
   const includeHtmlPreference = resolveReturnHtml(options, cfg)
@@ -54,11 +56,19 @@ export default defineEventHandler(async (event) => {
   const cacheTTL = Number(cfg?.scraper?.cacheTTL ?? 0)
   if (!options.force && cacheTTL > 0) {
     try {
-      const cached = await findFreshByUrl(normalizedOriginalUrl, cacheTTL)
+      const cached = await persistence.findFreshByUrl(normalizedOriginalUrl, cacheTTL)
       if (cached) {
         trace.setMethod('cache-hit')
-        trace.use('supabase:cache')
-        const result = mapDbJoinedToScrapeResult(cached)
+        if (hasScraperPersistence()) {
+          trace.use('persistence:cache')
+        }
+        const result: ScrapeResult = {
+          ...cached,
+          content: { ...cached.content },
+          metadata: { ...cached.metadata },
+          storage: cached.storage ? { ...cached.storage } : undefined,
+          confidenceFactors: [...cached.confidenceFactors]
+        }
         if (!includeHtmlPreference && result.content) {
           result.content.html = undefined
         }
@@ -304,6 +314,21 @@ async function scrapePdf(
     }
   }
 
+  if (text) {
+    const focusLabel = (PDF_CONFIG.focusSection || '').trim()
+    if (focusLabel) {
+      const focused = extractPdfSectionByHeading(text, focusLabel, {
+        minLength: PDF_CONFIG.minSectionLength,
+        maxLength: PDF_CONFIG.maxSectionLength ?? MAX_PDF_TEXT_LENGTH
+      })
+      if (focused) {
+        text = focused
+        trace.use('pdf:focus-section')
+        trace.note(`pdf section focus applied: "${focusLabel}" (${focused.length} chars)`)
+      }
+    }
+  }
+
   if (!text) {
     trace.note('PDF extraction returned no usable text')
     const result = buildErrorResult(normalizedUrl, 'pdf', 'EMPTY_CONTENT', 'PDF extraction returned no text')
@@ -316,7 +341,7 @@ async function scrapePdf(
 
   const summarySource = fallback?.summary || createSummaryFromText(text)
   const summary = sanitizeSummary(summarySource || createSummaryFromText(text))
-  const titleCandidate = fallback?.title || pdfParsedMeta?.title || text.split(/\r?\n/).map((l) => l.trim()).find(Boolean)
+  const title = derivePdfTitle(text, pdfParsedMeta, fallback)
   const publishDate = fallback?.publishedTime || pdfParsedMeta?.publishDate
   const author = fallback?.author || pdfParsedMeta?.author
   const confidencePayload = scorePdf(text)
@@ -335,7 +360,7 @@ async function scrapePdf(
       text
     },
     metadata: {
-      title: titleCandidate,
+      title,
       summary,
       description: summary,
       summaryGuideline: SUMMARY_CONFIG.prompt,
@@ -357,9 +382,10 @@ async function persistScrapeResult(
 
   const htmlSource = typeof ctx.rawHtml === 'string' ? ctx.rawHtml : result.content?.html
   const textSource = result.content?.text ?? ''
+  const persistence = getScraperPersistence()
 
   try {
-    const stored = await upsertResult(
+    const stored = await persistence.upsertResult(
       {
         url: result.url,
         normalizedUrl: result.normalizedUrl,
@@ -399,8 +425,8 @@ async function persistScrapeResult(
       result.storage = { ...(result.storage || {}), ...stored.paths }
     }
 
-    if (stored.id) {
-      trace.use('supabase:persist')
+    if (stored.id && hasScraperPersistence()) {
+      trace.use('persistence:persist')
     }
   } catch (error: any) {
     trace.note(`persistence failed: ${error?.message || 'error'}`)
@@ -617,6 +643,83 @@ function scorePdf(text: string) {
   return { confidence: Math.min(1, score), factors }
 }
 
+function extractPdfSectionByHeading(
+  text: string,
+  heading: string,
+  options: { minLength?: number; maxLength?: number }
+): string | undefined {
+  if (!text || !heading) return undefined
+
+  const normalizedHeading = normalizeHeadingForComparison(heading)
+  if (!normalizedHeading) return undefined
+
+  const lines = text.split(/\r?\n/)
+  let startIndex = -1
+
+  for (let index = 0; index < lines.length; index += 1) {
+    if (matchesHeading(lines[index], normalizedHeading)) {
+      startIndex = index
+      break
+    }
+  }
+
+  if (startIndex === -1) return undefined
+
+  const collected: string[] = []
+  for (let index = startIndex; index < lines.length; index += 1) {
+    const current = lines[index]
+    if (index > startIndex && isLikelySectionBoundary(current)) break
+    collected.push(current)
+  }
+
+  let section = collected.join('\n').trim()
+  const minLength = options.minLength ?? 0
+  if (section.length < minLength) return undefined
+
+  const maxLength = options.maxLength ?? 0
+  if (maxLength > 0 && section.length > maxLength) {
+    section = `${section.slice(0, maxLength).trim()}…`
+  }
+
+  return section
+}
+
+function matchesHeading(line: string, normalizedHeading: string) {
+  const trimmed = line.trim()
+  if (!trimmed) return false
+  const normalizedLine = normalizeHeadingForComparison(trimmed)
+  if (!normalizedLine) return false
+  if (normalizedLine === normalizedHeading) return true
+  if (normalizedLine.startsWith(normalizedHeading) && normalizedLine.length <= normalizedHeading.length + 5) {
+    return true
+  }
+  return false
+}
+
+function isLikelySectionBoundary(line: string) {
+  const trimmed = line.trim()
+  if (!trimmed) return false
+  if (trimmed.length > 120) return false
+  const normalized = normalizeHeadingForComparison(trimmed)
+  if (!normalized) return false
+  const wordCount = normalized.split(' ').length
+  const isAllCaps = /[A-Z]/.test(trimmed) && trimmed === trimmed.toUpperCase()
+  if (isAllCaps && wordCount <= 10) return true
+  if (/^(appendix|introduction|background|overview|conclusion|references|table of contents|contents)\b/i.test(trimmed)) {
+    return true
+  }
+  if (/^(section|chapter)\s+\d+/i.test(trimmed)) return true
+  if (/^\d+(?:\.\d+)*\s/.test(trimmed) && wordCount <= 12) return true
+  return false
+}
+
+function normalizeHeadingForComparison(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+}
+
 function createFallbackUuid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0
@@ -821,6 +924,45 @@ function sanitizeSummary(text: string) {
   return `${cleaned.slice(0, MAX_SUMMARY_LENGTH - 1).trim()}…`
 }
 
+function derivePdfTitle(text: string, pdfMeta?: PdfParsedMetadata, fallback?: ParsedJinaDocument) {
+  const sources = [pdfMeta?.title, fallback?.title, extractTitleFromPdfText(text)]
+
+  for (const candidate of sources) {
+    const sanitized = sanitizeTitleCandidate(candidate)
+    if (sanitized) return sanitized
+  }
+
+  return undefined
+}
+
+function sanitizeTitleCandidate(value?: string | null) {
+  if (!value) return undefined
+  const cleaned = cleanExtractedValue(value)
+  if (!cleaned) return undefined
+  if (cleaned.length > 80 && !cleaned.includes(' ')) return undefined
+  if (cleaned.length <= PDF_TITLE_MAX_LENGTH) return cleaned
+  const truncated = cleaned.slice(0, PDF_TITLE_MAX_LENGTH - 1).trim()
+  return truncated ? `${truncated}…` : undefined
+}
+
+function extractTitleFromPdfText(text: string) {
+  if (!text) return ''
+  const trimmed = text.trim()
+  if (!trimmed) return ''
+
+  const punctuationMatch = trimmed.slice(0, PDF_TITLE_MAX_LENGTH + 20).match(/^[^.!?]+[.!?](?=\s|$)/)
+  if (punctuationMatch?.[0]) {
+    const snippet = punctuationMatch[0].trim()
+    if (snippet.length >= 6) return snippet
+  }
+
+  const words = trimmed.split(/\s+/).slice(0, PDF_TITLE_WORD_LIMIT)
+  const wordCandidate = words.join(' ').trim()
+  if (wordCandidate) return wordCandidate
+
+  return trimmed.slice(0, PDF_TITLE_MAX_LENGTH).trim()
+}
+
 function createSummaryFromText(text: string) {
   if (!text) return ''
   const normalized = normalizeForSummary(text)
@@ -835,6 +977,8 @@ function escapeRegex(input: string) {
 const MAX_SUMMARY_LENGTH = SUMMARY_CONFIG.maxLength
 const SUMMARY_WORD_LIMIT = Math.max(60, Math.round(MAX_SUMMARY_LENGTH / 5))
 const MAX_PDF_TEXT_LENGTH = 20000
+const PDF_TITLE_MAX_LENGTH = 160
+const PDF_TITLE_WORD_LIMIT = 18
 
 interface PdfParsedMetadata {
   title?: string
@@ -1085,7 +1229,7 @@ function normalizeForSummary(text: string) {
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     .replace(/([A-Za-z])(\d)/g, '$1 $2')
     .replace(/(\d)([A-Za-z])/g, '$1 $2')
-    .replace(/[0000-001f007f]+/g, ' ')
+    .replace(/[\u0000-\u001f\u007f]+/g, ' ')
 
   for (const word of keywords) {
     const pattern = new RegExp(`([a-z])(${word})`, 'g')

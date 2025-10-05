@@ -5,7 +5,6 @@ export interface ModuleOptions {
   mode?: 'sync' | 'queue'
   cacheTTL?: number
   secret?: string
-  supabase?: { url?: string; key?: string }
   ocr?: { enabled?: boolean }
   returnHtmlDefault?: boolean
   domainOverrides?: Record<string, unknown>
@@ -28,13 +27,9 @@ export default defineNuxtModule<ModuleOptions>({
     const runtimeDir = resolve('./runtime')
 
     // Expose runtime config for server handler
-    const { supabase, ...rest } = options
-    const supabaseOptions = supabase ? { bucket: 'scraper', ...supabase } : undefined
-
     nuxt.options.runtimeConfig.scraper = {
       ...(nuxt.options.runtimeConfig.scraper as any),
-      ...rest,
-      ...(supabaseOptions ? { supabase: supabaseOptions } : {})
+      ...options
     }
 
     // API route (POST /api/scrape)
@@ -42,6 +37,12 @@ export default defineNuxtModule<ModuleOptions>({
       route: '/api/scrape',
       method: 'post',
       handler: resolve(runtimeDir, 'server/api/scrape.post')
+    })
+
+    addServerHandler({
+      route: '/api/scrape/:id',
+      method: 'put',
+      handler: resolve(runtimeDir, 'server/api/scrape/[id].put')
     })
 
     // Composable auto-import

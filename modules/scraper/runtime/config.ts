@@ -1,9 +1,15 @@
-import type { DomainScraperConfig, ScraperConfig, ScraperFieldConfig, SummaryGuidelineConfig } from './config.types'
+import type { DomainScraperConfig, PdfScraperConfig, ScraperConfig, ScraperFieldConfig, SummaryGuidelineConfig } from './config.types'
 
 const summaryGuideline: SummaryGuidelineConfig = {
   prompt:
     'Summarize the linked content in no more than 400 characters using a neutral newsroom tone. Highlight the primary subject, the key facts or findings, and any concrete outcomes or next steps while avoiding speculation or promotional language.',
   maxLength: 400
+}
+
+const pdfConfig: PdfScraperConfig = {
+  focusSection: 'Executive Summary',
+  minSectionLength: 200,
+  maxSectionLength: 6000
 }
 
 const defaultConfig: DomainScraperConfig = {
@@ -32,6 +38,7 @@ const defaultConfig: DomainScraperConfig = {
 
 export const scraperConfig: ScraperConfig = {
   summary: summaryGuideline,
+  pdf: pdfConfig,
   domains: {
     '*': defaultConfig,
     'www.sfexaminer.com': {
@@ -53,6 +60,10 @@ export const scraperConfig: ScraperConfig = {
 export function getConfigForHost(hostname: string): DomainScraperConfig {
   const domainConfig = scraperConfig.domains[hostname] || {}
   return mergeDomainConfig(scraperConfig.domains['*'] || {}, domainConfig)
+}
+
+export function getPdfConfig(): PdfScraperConfig {
+  return scraperConfig.pdf || {}
 }
 
 export function getSummaryConfig(): SummaryGuidelineConfig {

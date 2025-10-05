@@ -4,6 +4,12 @@ export interface ScraperFieldConfig {
   regexes?: string[]
 }
 
+export interface PdfScraperConfig {
+  focusSection?: string
+  minSectionLength?: number
+  maxSectionLength?: number
+}
+
 export interface SummaryGuidelineConfig {
   prompt: string
   maxLength: number
@@ -19,4 +25,5 @@ export interface DomainScraperConfig {
 export interface ScraperConfig {
   summary: SummaryGuidelineConfig
   domains: Record<string, DomainScraperConfig>
+  pdf?: PdfScraperConfig
 }
