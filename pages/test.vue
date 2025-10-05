@@ -39,6 +39,7 @@
         :is-busy="isLoading"
         failure-label="Scrape failed:"
         :failure-message="scrapeError"
+        @edit-save="onResultUpdated"
       />
     </div>
   </ccm-section>
@@ -107,6 +108,10 @@ const onSubmit = async () => {
   } finally {
     isLoading.value = false
   }
+}
+
+const onResultUpdated = (updated: ScrapeResponse) => {
+  result.value = updated
 }
 
 definePageMeta({

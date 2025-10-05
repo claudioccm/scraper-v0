@@ -64,6 +64,7 @@
             :result="item.result"
             :is-busy="item.status === 'running'"
             :failure-message="item.message"
+            @edit-save="onBatchResultUpdate(index, $event)"
           />
         </div>
       </section>
@@ -157,6 +158,12 @@ async function onSubmit() {
   } finally {
     isProcessing.value = false
   }
+}
+
+function onBatchResultUpdate(index: number, updated: ScrapeResponse) {
+  const item = batchItems.value[index]
+  if (!item) return
+  batchItems.value.splice(index, 1, { ...item, result: updated })
 }
 
 async function runBatch(items: BatchItem[]) {

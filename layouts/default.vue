@@ -1,15 +1,6 @@
 <template>
   <div class="layout">
-    <ccm-hero
-      v-if="hero"
-      class="layout-hero"
-      :brow="hero.brow"
-      :title="hero.title"
-      :tagline="hero.tagline"
-      :background-color="hero.backgroundColor"
-      :size="hero.size || 'l'"
-      :hide-topbar="hero.hideTopbar === true"
-    />
+    <ccm-topbar class="layout-topbar" />
     <main class="layout-main">
       <slot />
     </main>
@@ -30,13 +21,13 @@ const hero = computed(() => route.meta.hero || heroState.value)
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr;
   grid-template-areas:
-    "hero"
+    "topbar"
     "main"
     "footer";
 }
 
 .layout-hero {
-  grid-area: hero;
+  grid-area: topbar;
   background-color: #eee;
 }
 
