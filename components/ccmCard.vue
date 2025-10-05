@@ -78,7 +78,7 @@ const wrapperAttrs = computed(() => {
   --_card-border-radius: var(--border-radius-l);
   --_card-gap: var(--space-m);
   --_card-background-color: var(--color-primary-tint-20);
-  --_card-color: var(--color-primary-tint-80);
+  --_card-color: var(--color-base-tint-80);
   --_card-border-width: 2px;
   --_card-border-style: solid;
 }

@@ -5,10 +5,15 @@
     </h1>
     <nav class="margin-left:auto">
       <ul class="menu | cluster">
-        <li><nuxt-link class="menu__item" to="/">Home</nuxt-link></li>
-        <li><nuxt-link class="menu__item" to="/blog">Insights</nuxt-link></li>
-        <li><nuxt-link class="menu__item" to="/test">Test</nuxt-link></li>
-        <li><nuxt-link class="menu__item" to="/batch-test">Batch Test</nuxt-link></li>
+        <!-- <li><nuxt-link class="menu__item" to="/">Home</nuxt-link></li> -->
+        <!-- <li><nuxt-link class="menu__item" to="/blog">Insights</nuxt-link></li> -->
+        <li><nuxt-link class="menu__item" to="/analyst">Analyst</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/manager">Manager</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/shortlist">Shortlist</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/saved">Saved for Later</nuxt-link></li>
+        <li><nuxt-link class="menu__item" to="/archive">Archive</nuxt-link></li>
+        <!-- <li><nuxt-link class="menu__item" to="/test">Test</nuxt-link></li> -->
+        <!-- <li><nuxt-link class="menu__item" to="/batch-test">Batch Test</nuxt-link></li> -->
       </ul>
     </nav>
   </div>
@@ -19,6 +24,10 @@
 </script>
 
 <style scoped>
+.topbar {
+  margin-inline: var(--space-xl);
+}
+
 .topbar__title {
   padding-block: var(--space-xs);
   * { text-decoration: none; }
