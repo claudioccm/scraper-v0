@@ -7,6 +7,7 @@
       <ul class="menu | cluster">
         <!-- <li><nuxt-link class="menu__item" to="/">Home</nuxt-link></li> -->
         <!-- <li><nuxt-link class="menu__item" to="/blog">Insights</nuxt-link></li> -->
+        <li><nuxt-link class="menu__item" to="/suggestions">Suggestions</nuxt-link></li>
         <li><nuxt-link class="menu__item" to="/analyst">Analyst</nuxt-link></li>
         <li><nuxt-link class="menu__item" to="/manager">Manager</nuxt-link></li>
         <li><nuxt-link class="menu__item" to="/shortlist">Shortlist</nuxt-link></li>

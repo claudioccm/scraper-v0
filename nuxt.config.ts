@@ -15,7 +15,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     './modules/persistence-supabase',
-    './modules/scraper'
+    './modules/scraper',
+    './modules/rss-intake'
   ],
   runtimeConfig: {
     scraper: {

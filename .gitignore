@@ -24,4 +24,7 @@ logs
 !.env.example
 content/
 
+# RSS Intake data
+data/rss-processed-posts.json
+
 package-lock.json

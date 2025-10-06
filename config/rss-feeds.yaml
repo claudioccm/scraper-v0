@@ -1,0 +1,19 @@
+# RSS Intake Configuration
+# Global criteria for article relevance
+system_prompt: "Responsible AI and AI Ethics"
+
+# List of RSS feeds to monitor
+feeds:
+  # Example: TechCrunch AI feed
+  - rss_feed_url: "https://techcrunch.com/tag/artificial-intelligence/feed/"
+    # This feed uses the global system_prompt
+
+  # Example: AI News with custom extension
+  # - rss_feed_url: "https://www.artificialintelligence-news.com/feed/"
+  #   custom_prompt: "Healthcare applications"
+  #   # Combined criteria: "Responsible AI and AI Ethics AND Healthcare applications"
+
+  # Example: Custom criteria that replaces global
+  # - rss_feed_url: "https://example.com/data-policy/feed/"
+  #   system_prompt: "Open Data and Migration Policy"
+  #   # This feed only uses this system_prompt, ignoring the global one
