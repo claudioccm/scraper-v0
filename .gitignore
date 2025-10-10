@@ -17,6 +17,9 @@ logs
 .DS_Store
 .fleet
 .idea
+/content/docs
+/content/ui-library
+
 
 # Local env files
 .env
